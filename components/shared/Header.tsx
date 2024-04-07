@@ -11,7 +11,7 @@ export default function Header(){
         <header className="w-full border-b">
             <div className="wrapper flex items-center justify-between" >
                 <Link href="/" className="w-36">
-                    <Image priority src="/assets/image/logo.svg" width={128} height={38} alt="Event App Logo" />
+                    <Image priority src="/assets/images/logo.svg" width={128} height={38} alt="Event App Logo" />
                 </Link>
 
                 <SignedIn>
