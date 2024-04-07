@@ -228,6 +228,46 @@ body {
   .toggle-switch {
     @apply bg-gray-300 !important;
   }
+
+
+
+  .mobile_menu_bar{
+    width: 32px;
+  }
+
+
+  .mobile_menu_bar:before{
+    visibility: hidden !important;
+  }
+
+  .mobile-menu-toggle{
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-nav-btn {
+    display: inline-block;
+    /* float: right; */
+    width: 31px;
+    padding: 5px;
+    cursor: pointer;
+    /* margin: 30px 5px 0 0; */
+    /* position: absolute; */
+    /* right: 0;
+    top: -29px; */
+  }
+
+
+  .menu-nav-btn span {
+    width: 100%;
+    float: right;
+    height: 2px;
+    background: #000000;
+    margin: 2px 0;
+    border-radius: 22px;
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 /* ========================================== CLERK STYLES */
