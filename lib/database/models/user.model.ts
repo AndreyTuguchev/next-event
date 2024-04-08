@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     blockedUser : { type: Boolean,  default: false },
     amountOfBlockedActions : { type: Number,  default: 0 },
     listOfBlockedTime : { type: String,  default: "" },
-    userRole: { type: String, default: "user" },
+    userRole: { type: String, default: "default_user" },
     
 })
 

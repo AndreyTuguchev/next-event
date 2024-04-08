@@ -6,6 +6,13 @@ export type CreateUserParams = {
     username: string
     email: string
     photo: string
+    maxEventsAllowed : number
+    eventsCreatedAmount : number
+    listOfEventsCreatedTime : string
+    blockedUser : boolean
+    amountOfBlockedActions : number
+    listOfBlockedTime : string
+    userRole: string
   }
   
   export type UpdateUserParams = {
