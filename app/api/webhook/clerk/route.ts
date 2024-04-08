@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       blockedUser : false,
       amountOfBlockedActions : 0,
       listOfBlockedTime : "",
-      userRole: "user",
+      userRole: "default_user",
     }
 
     const newUser = await createUser(user);
