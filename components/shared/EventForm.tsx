@@ -9,6 +9,10 @@ import { eventFormSchema } from "@/lib/validator"
 import * as z from "zod"
 import { eventDefaultValues } from "@/constants"
 import Dropdown from "./Dropdown"
+import { Textarea } from "@/components/ui/textarea"
+import FileUploader from "./FileUploader"
+import { useState } from "react"
+
 
 
 type EventFormProps = {
@@ -20,6 +24,13 @@ type EventFormProps = {
 
 export default function EventForm( { userId, type } : EventFormProps ){
 
+    const [ newFiles, setNewFiles ] = useState<File[]>([])
+
+    const [ formSubmitted, setFormSubmitted ] = useState(false);
+    const [ newFilesUploaded, setNewFilesUploaded ] = useState(false);
+
+    
+
     const initialValues = eventDefaultValues;
 
     const form = useForm<z.infer<typeof eventFormSchema>>({
@@ -28,9 +39,15 @@ export default function EventForm( { userId, type } : EventFormProps ){
     })
 
     function onSubmit(values: z.infer<typeof eventFormSchema>) {
+        setFormSubmitted(true);
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+
+        if (newFilesUploaded) {
+            // wait for files to be uploaded and proceed only after that.
+
+        }
       }
 
     return (
@@ -66,11 +83,41 @@ export default function EventForm( { userId, type } : EventFormProps ){
                     </FormItem>
                     )}
                 />
-
-
             </div>
 
-          <Button type="submit">Submit</Button>
+            <div className="flex flex-col gap-5 md:flex-row">
+                <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                    <FormItem className="w-full ">
+                        <FormControl className="h-72">
+                            <Textarea placeholder="Description" {...field} className="textarea rounded-2xl" />
+                        </FormControl>
+                        
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+            </div>
+
+            <div className="flex flex-col gap-5 md:flex-row">
+                <FormField
+                    control={form.control}
+                    name="imageUrl"
+                    render={({ field }) => (
+                    <FormItem className="w-full ">
+                        <FormControl className="h-72">
+                            <FileUploader onFieldChange={field.onChange} imageUrl={field.value} setNewFiles={setNewFiles} formSubmitted={formSubmitted} setNewFilesUploaded={setNewFilesUploaded} />
+                        </FormControl>
+                        
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+            </div>
+
+          <Button type="submit" className="rounded-2xl">Submit Event</Button>
         </form>
       </Form>
     )
