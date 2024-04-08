@@ -13,7 +13,7 @@ export default function NavItems (){
             {headerLinks.map((link)=>{
                 const isActive = link.route === pathname;
                 return (
-                    <li key={crypto.randomUUID()} className={ ` ${isActive && 'text-primary-500'} flex-center p-medium-16 whitespace-nowrap `}>
+                    <li key={crypto.randomUUID()} className={ ` ${isActive && 'text-primary-500'} flex-center py-[10px] p-medium-16 whitespace-nowrap w-full`}>
                         <Link href={link.route} >{link.label}</Link> 
                     </li>
                 )
