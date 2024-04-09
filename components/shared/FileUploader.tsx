@@ -10,83 +10,17 @@ import { Button } from "../ui/button";
 
 type FileUploaderProps = {
     onFieldChange: (value: string) => void ;
-    imageUrl: string;
-    setNewFiles: Dispatch<SetStateAction<File[]>>;
-    formSubmitted: boolean;
+    submitButton: boolean;
     setNewFilesUploaded: (value: boolean) => void ;
+    setUploadedImageUrl: (value: string) => void;
 }
 
-// export default function FileUploader({ onFieldChange, imageUrl, setFiles }: FileUploaderProps){
-
-//     return <></>
-// }
 
 
-
-
-
-
-
- 
-// export default function FileUploader({ onFieldChange, imageUrl }: FileUploaderProps) {
-//   const [files, setFiles] = useState<File[]>([]);
-//   const onDrop = useCallback((acceptedFiles: File[]) => {
-//     setFiles(acceptedFiles);
-//   }, []);
- 
-//   const { startUpload, permittedFileInfo } = useUploadThing(
-//     "imageUploader",
-//     {
-//       onClientUploadComplete: () => {
-//         alert("uploaded successfully!");
-//       },
-//       onUploadError: () => {
-//         alert("error occurred while uploading");
-//       },
-//       onUploadBegin: () => {
-//         alert("upload has begun");
-//       },
-//     },
-//   );
- 
-//   const fileTypes = permittedFileInfo?.config
-//     ? Object.keys(permittedFileInfo?.config)
-//     : [];
- 
-//   const { getRootProps, getInputProps } = useDropzone({
-//     onDrop,
-//     accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
-//   });
- 
-//   return (
-//     <div {...getRootProps()}>
-//       <input {...getInputProps()} />
-//       <div>
-//         {files.length > 0 && (
-//           <button onClick={() => startUpload(files)}>
-//             Upload {files.length} files
-//           </button>
-//         )}
-//       </div>
-//       Drop files here!
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-export default function FileUploader({ onFieldChange, imageUrl, setNewFiles, formSubmitted, setNewFilesUploaded }: FileUploaderProps) {
-  const [files, setFiles] = useState<File[]>([]);
+export default function FileUploader({ onFieldChange,  setUploadedImageUrl, submitButton, setNewFilesUploaded }: FileUploaderProps) {
+  const [ files, setFiles ] = useState<File[]>([]);
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFiles(acceptedFiles);
+    setFiles( acceptedFiles.splice(0, acceptedFiles.length) );
     // onFieldChange(convertFileToUrl(acceptedFiles[0]))
   }, []);
  
@@ -95,6 +29,8 @@ export default function FileUploader({ onFieldChange, imageUrl, setNewFiles, for
     {
       onClientUploadComplete: () => {
         console.log("uploaded successfully!");
+        setNewFilesUploaded(true);
+        
       },
       onUploadError: () => {
         console.log("error occurred while uploading");
@@ -105,22 +41,21 @@ export default function FileUploader({ onFieldChange, imageUrl, setNewFiles, for
     },
   );
  
-  const fileTypes = permittedFileInfo?.config
-    ? Object.keys(permittedFileInfo?.config)
-    : [];
- 
+
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
+    accept: 'image/*' ? generateClientDropzoneAccept(['image/*']) : undefined,
   });
 
-
-
   useEffect(() => {
-    if ( true === formSubmitted ){
-        startUpload(files);
+    console.log('submitButton in useEffect =', submitButton)
+    if ( true === submitButton ){
+        startUpload(files).then( (uploadedImage) => {
+           if(uploadedImage && uploadedImage[0]?.url) setUploadedImageUrl(uploadedImage[0]?.url);
+        })
     }
-  }, [formSubmitted]) // eslint-disable-line
+
+  }, [submitButton]) // eslint-disable-line
  
   return (
     <div className="wrapper border cursor-pointer flex rounded-2xl">
@@ -149,51 +84,3 @@ export default function FileUploader({ onFieldChange, imageUrl, setNewFiles, for
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { UploadDropzone } from "@uploadthing/react";
-// import { OurFileRouter } from "@/app/api/uploadthing/core";
- 
-
- 
-// export const OurUploadDropzone = () => (
-//   <UploadDropzone<OurFileRouter>
-//     endpoint="imageUploader"
-//     onClientUploadComplete={(res) => {
-//       // Do something with the response
-//       console.log("Files: ", res);
-//       alert("Upload Completed");
-//     }}
-//     onUploadError={(error: Error) => {
-//       alert(`ERROR! ${error.message}`);
-//     }}
-//     onUploadBegin={(name) => {
-//       // Do something once upload begins
-//       console.log("Uploading: ", name);
-//     }}
-//   />
-// );

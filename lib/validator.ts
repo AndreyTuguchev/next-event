@@ -18,7 +18,6 @@ export const eventFormSchema = z.object({
         message: "Location must be at less than 400 characters.",
     }),
   
-    imageUrl: z.string().url(),
     startDateTime: z.date(),
     endDateTime: z.date(),
     categoryId: z.string(),
@@ -26,4 +25,10 @@ export const eventFormSchema = z.object({
     isFree: z.boolean(),
     url: z.string().url()
     
-  })
+})
+
+export const eventImageSchema = z.object({
+    imageUrl: z.string().url(),
+})
+
+export const eventSchemaWithImage = eventFormSchema.merge(eventImageSchema);
