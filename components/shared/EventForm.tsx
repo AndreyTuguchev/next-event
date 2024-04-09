@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { eventFormSchema, eventSchemaWithImage, eventImageSchema } from "@/lib/validator"
+import { eventFormSchema } from "@/lib/validator"
 import * as z from "zod"
 import { eventDefaultValues } from "@/constants"
 import Dropdown from "./Dropdown"
@@ -16,67 +16,83 @@ import Image from "next/image"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox"
+import { useUploadThing } from "@/lib/uploadthing";
 
 
 
 
 type EventFormProps = {
-    userId: string;
+    userRole: string;
     type: "Create" | "Update";
 }
 
 
 
-export default function EventForm( { userId, type } : EventFormProps ){
-
-    const [ newFiles, setNewFiles ] = useState<File[]>([])
+export default function EventForm( { userRole, type } : EventFormProps ){
 
     const [ submitButton, setSubmitButton ] = useState(false);
     const [ newFilesUploaded, setNewFilesUploaded ] = useState(false);
     const [ uploadedImageUrl, setUploadedImageUrl ] = useState("");
 
-
+    const [ files, setFiles ] = useState<File[]>([]);
+    
+    const { startUpload } = useUploadThing( "imageUploader" );
+    
     const initialValues = eventDefaultValues;
 
-    const form = useForm<z.infer<typeof eventSchemaWithImage>>({
+    const form = useForm<z.infer<typeof eventFormSchema>>({
         resolver: zodResolver(eventFormSchema),
         defaultValues: initialValues,
     })
 
-    const newHeroImgUrl = z.object({
-        imageUrl: z.string().url(),
-    })
-    type newHeroImgUrl = z.infer<typeof eventImageSchema>
-
-    async function onSubmit(values: z.infer<typeof eventSchemaWithImage>) {
+    async function onSubmit(values: z.infer<typeof eventFormSchema>) {
         setSubmitButton(true);
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
+
         console.log('form submitted')
+        console.log('files =', files);
 
 
-        if ( newFilesUploaded && null != uploadedImageUrl ) {
-            // wait for files to be uploaded and proceed only after that.
+        let uploadedImageUrl = values.imageUrl;
 
-            values.imageUrl = uploadedImageUrl
+        if(files.length > 0) {
+            const uploadedImages = await startUpload(files)
+        
+            console.log('uploadedImageUrl =', uploadedImageUrl )
 
-        }
+            if(!uploadedImages) {
+                return
+            }
+        
+            uploadedImageUrl = uploadedImages[0].url
+        }    
+            
+
+        // if(type === 'Create') {
+        //     try {
+        //       const newEvent = await createEvent({
+        //         event: { ...values, imageUrl: uploadedImageUrl },
+        //         userId,
+        //         path: '/profile'
+        //       })
+      
+        //       if(newEvent) {
+        //         form.reset();
+        //         router.push(`/events/${newEvent._id}`)
+        //       }
+        //     } catch (error) {
+        //       console.log(error);
+        //     }
+        // }
+
+
+
 
         console.log(values)
-        // const eventHeroImageUrl: newHeroImgUrl = values.imageUrl;
         console.log(values.imageUrl)
       }
 
       
 
-    function handleSubmitButtonClick (  ){
-        // console.log(form.getValues())
-
-        setSubmitButton(true);
-
-        console.log('uploadedImageUrl =', uploadedImageUrl )
-
-    }
 
     return (
         <Form {...form}>
@@ -104,7 +120,7 @@ export default function EventForm( { userId, type } : EventFormProps ){
                     render={({ field }) => (
                     <FormItem className="w-full ">
                         <FormControl>
-                            <Dropdown onChangeHandler={field.onChange} value={field.value} />
+                            <Dropdown onChangeHandler={field.onChange} value={field.value} userRole={userRole} />
                         </FormControl>
                         
                         <FormMessage />
@@ -134,7 +150,7 @@ export default function EventForm( { userId, type } : EventFormProps ){
                     render={({ field }) => (
                     <FormItem className="w-full ">
                         <FormControl className="h-72">
-                            <FileUploader onFieldChange={field.onChange} setUploadedImageUrl={setUploadedImageUrl} submitButton={submitButton} setNewFilesUploaded={setNewFilesUploaded} />
+                            <FileUploader onFieldChange={field.onChange} imageUrl={field.value} setFiles={setFiles} />
                         </FormControl>
                         
                         <FormMessage />
@@ -232,7 +248,7 @@ export default function EventForm( { userId, type } : EventFormProps ){
                                         <FormControl>
                                             <div className="flex items-center">
                                                 <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free Ticket</label>
-                                                <Checkbox id="isFree" className="mr-2 h-5 w-5 border-2 border-primary-500" />
+                                                <Checkbox id="isFree" onCheckedChange={field.onChange} checked={field.value} className="mr-2 h-5 w-5 border-2 border-primary-500" />
                                             </div>
                                         </FormControl>
                                         
@@ -269,8 +285,7 @@ export default function EventForm( { userId, type } : EventFormProps ){
 
           <Button type="submit" size="lg"
           disabled={form.formState.isSubmitting}
-          className="col-span-2 w-full button" 
-          onClick={()=> { handleSubmitButtonClick() }}>
+          className="col-span-2 w-full button" >
             {form.formState.isSubmitting ? "Submitting Event..." : `${type} Event`}
           </Button>
         </form>

@@ -4,7 +4,13 @@ import { auth } from "@clerk/nextjs";
 
 export default function CreateEvent (){
 
-    const { sessionClaims } = auth();
+    let userRole = (auth().sessionClaims?.metadata as any)?.userRole;
+
+    if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
+        userRole = "admin";
+    }else{
+        userRole = "user";
+    }
 
     return (
         <>
@@ -13,7 +19,7 @@ export default function CreateEvent (){
             </section>
 
             <div className="wrapper my-8">
-                <EventForm userId={ sessionClaims?.userId as string } type="Create" />
+                <EventForm userRole={userRole} type="Create" />
             </div>
         </>
     )
