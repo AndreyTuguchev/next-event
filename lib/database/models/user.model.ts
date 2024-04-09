@@ -21,6 +21,9 @@ const UserSchema = new Schema({
     amountOfBlockedActions : { type: Number,  default: 0 },
     listOfBlockedTime : { type: String,  default: "" },
     userRole: { type: String, default: "default_user" },
+    eventsApprovedByAdmin : { type: Number, default: 0 },
+    eventsRejectedByAdmin : { type: Number, default: 0 },
+    eventsPending : { type: Number, default: 0 },
     
 })
 
