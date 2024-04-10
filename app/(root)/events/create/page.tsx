@@ -4,13 +4,20 @@ import { auth } from "@clerk/nextjs";
 
 export default function CreateEvent (){
 
-    let userRole = (auth().sessionClaims?.metadata as any)?.userRole;
+    const sessionClaims = auth().sessionClaims;
+
+    let userRole = sessionClaims?.userRole as string;
 
     if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
         userRole = "admin";
     }else{
         userRole = "user";
     }
+
+    const userId = sessionClaims?.userId as string;
+    
+    // console.log(' userId =', userId)
+    // console.log(' auth() =', auth())
 
     return (
         <>
@@ -19,7 +26,7 @@ export default function CreateEvent (){
             </section>
 
             <div className="wrapper my-8">
-                <EventForm userRole={userRole} type="Create" />
+                <EventForm userId={userId} userRole={userRole} type="Create" />
             </div>
         </>
     )

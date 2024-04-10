@@ -17,25 +17,23 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox"
 import { useUploadThing } from "@/lib/uploadthing";
+import { useRouter } from "next/navigation"
+import { createEvent } from "@/lib/actions/event.action"
 
 
 
 
 type EventFormProps = {
     userRole: string;
+    userId: string;
     type: "Create" | "Update";
 }
 
 
 
-export default function EventForm( { userRole, type } : EventFormProps ){
-
-    const [ submitButton, setSubmitButton ] = useState(false);
-    const [ newFilesUploaded, setNewFilesUploaded ] = useState(false);
-    const [ uploadedImageUrl, setUploadedImageUrl ] = useState("");
+export default function EventForm( { userId, userRole, type } : EventFormProps ){
 
     const [ files, setFiles ] = useState<File[]>([]);
-    
     const { startUpload } = useUploadThing( "imageUploader" );
     
     const initialValues = eventDefaultValues;
@@ -43,14 +41,14 @@ export default function EventForm( { userRole, type } : EventFormProps ){
     const form = useForm<z.infer<typeof eventFormSchema>>({
         resolver: zodResolver(eventFormSchema),
         defaultValues: initialValues,
-    })
+    });
+
+    const router = useRouter();
 
     async function onSubmit(values: z.infer<typeof eventFormSchema>) {
-        setSubmitButton(true);
 
         console.log('form submitted')
         console.log('files =', files);
-
 
         let uploadedImageUrl = values.imageUrl;
 
@@ -67,22 +65,22 @@ export default function EventForm( { userRole, type } : EventFormProps ){
         }    
             
 
-        // if(type === 'Create') {
-        //     try {
-        //       const newEvent = await createEvent({
-        //         event: { ...values, imageUrl: uploadedImageUrl },
-        //         userId,
-        //         path: '/profile'
-        //       })
+        if(type === 'Create') {
+            try {
+              const newEvent = await createEvent({
+                event: { ...values, imageUrl: uploadedImageUrl },
+                userId,
+                path: '/profile'
+              })
       
-        //       if(newEvent) {
-        //         form.reset();
-        //         router.push(`/events/${newEvent._id}`)
-        //       }
-        //     } catch (error) {
-        //       console.log(error);
-        //     }
-        // }
+              if(newEvent) {
+                form.reset();
+                router.push(`/events/${newEvent._id}`)
+              }
+            } catch (error) {
+              console.log(error);
+            }
+        }
 
 
 
