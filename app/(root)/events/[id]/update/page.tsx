@@ -5,15 +5,20 @@ import { redirect } from 'next/navigation'
 
 export default function UpdateEvent (){
 
-    const { sessionClaims } = auth();
+    const sessionClaims = auth().sessionClaims;
 
-    const userRole = ( sessionClaims?.metadata as any )?.userRole;
+    let userRole = sessionClaims?.userRole as string;
 
-    if ( null == userRole ) redirect('/');
-    
-    if ( !userRole.toLowerCase().endsWith('admin')) {
-        redirect('/')
+    if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
+        userRole = "admin";
+    }else{
+        userRole = "user";
     }
+
+    const userId = sessionClaims?.userId as string;
+    
+    // console.log(' userId =', userId)
+    // console.log(' auth() =', auth())
 
     return (
         <>
@@ -22,7 +27,7 @@ export default function UpdateEvent (){
             </section>
 
             <div className="wrapper my-8">
-                <EventForm userId={ sessionClaims?.userId as string } type="Update" />
+                <EventForm userId={ sessionClaims?.userId as string } userRole={userRole} type="Update" />
             </div>
         </>
     )
