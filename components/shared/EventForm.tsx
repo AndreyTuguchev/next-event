@@ -18,7 +18,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox"
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation"
-import { createEvent } from "@/lib/actions/event.action"
+import { createEvent, updateEvent } from "@/lib/actions/event.action"
+import { IEvent } from "@/lib/database/models/event.model"
 
 
 
@@ -27,16 +28,23 @@ type EventFormProps = {
     userRole: string;
     userId: string;
     type: "Create" | "Update";
+    event?: IEvent,
+    eventId?: string;
 }
 
 
 
-export default function EventForm( { userId, userRole, type } : EventFormProps ){
+export default function EventForm( { userId, userRole, type, event, eventId } : EventFormProps ){
 
     const [ files, setFiles ] = useState<File[]>([]);
     const { startUpload } = useUploadThing( "imageUploader" );
     
-    const initialValues = eventDefaultValues;
+    const initialValues = event && type === 'Update' ? 
+                        {...event,
+                            startDateTime: new Date(event.startDateTime),
+                            endDateTime: new Date(event.endDateTime),
+                        } : 
+                        eventDefaultValues;
 
     const form = useForm<z.infer<typeof eventFormSchema>>({
         resolver: zodResolver(eventFormSchema),
@@ -83,7 +91,28 @@ export default function EventForm( { userId, userRole, type } : EventFormProps )
         }
 
 
+        if(type === 'Update') {
 
+            if( !eventId) {
+                router.back();
+                return;
+            }
+
+            try {
+                const updatedEvent = await updateEvent({
+                    userId,
+                    event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+                    path: `/events/${eventId}`
+                  })
+      
+              if( updatedEvent ) {
+                form.reset();
+                router.push(`/events/${updatedEvent._id}`)
+              }
+            } catch (error) {
+              console.log(error);
+            }
+        }
 
         console.log(values)
         console.log(values.imageUrl)

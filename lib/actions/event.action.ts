@@ -1,6 +1,6 @@
 "use server"
 
-import { CreateEventParams, DeleteEventParams, GetAllEventsParams } from "@/types"
+import { ApproveEventParams, CreateEventParams, DeleteEventParams, GetAllEventsParams, UpdateEventParams } from "@/types"
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database";
 import User from "../database/models/user.model";
@@ -10,7 +10,7 @@ import { revalidatePath } from "next/cache";
 
 const populateEvent = async ( query: any ) => {
     return query
-        .populate({ path: 'orginizer', model: User, select: '_id firstName lastName' })
+        .populate({ path: 'organizer', model: User, select: '_id firstName lastName' })
         .populate({ path: 'category', model: Category, select: '_id name' })
 }
 
@@ -19,16 +19,14 @@ export const createEvent = async ({ event, userId, path } : CreateEventParams ) 
     try {
         await connectToDatabase();
 
-        const orginizer = await User.findById(userId);
+        const organizer = await User.findById(userId);
 
-        if ( !orginizer ) {
-            throw new Error('Orginizer not found');
+        if ( !organizer ) {
+            throw new Error('organizer not found');
         }
 
-        const newEvent = await Event.create({ ...event, category: event.categoryId, orginizer: userId });
+        const newEvent = await Event.create({ ...event, category: event.categoryId, organizer: userId });
 
-        revalidatePath("/")
-        revalidatePath("/events")
 
         return JSON.parse( JSON.stringify(newEvent));
 
@@ -105,3 +103,29 @@ export const deleteEvent = async ( { eventId, path } : DeleteEventParams ) => {
          handleError(error)
     }
 }
+
+
+
+export async function updateEvent({ userId, event, path }: UpdateEventParams) {
+    try {
+      await connectToDatabase()
+  
+    const eventToUpdate = await Event.findById(event._id)
+
+      if (!eventToUpdate || eventToUpdate.organizer.toHexString() !== userId) {
+        throw new Error('Unauthorized or event not found')
+      }
+  
+      const updatedEvent = await Event.findByIdAndUpdate(
+        event._id,
+        { ...event, category: event.categoryId },
+        { new: true }
+      )
+      revalidatePath(path)
+
+      return JSON.parse(JSON.stringify(updatedEvent))
+    } catch (error) {
+      handleError(error)
+    }
+  }
+  

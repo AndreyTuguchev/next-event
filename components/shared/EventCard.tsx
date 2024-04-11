@@ -18,13 +18,13 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
 
     const eventStartData = formatDateTime(event.startDateTime);
 
-    const isEventCreator = event.orginizer._id.toString() === loggedInUserId;
+    const isEventCreator = event.organizer._id.toString() === loggedInUserId;
 
 
     // const eventEndData = formatDateTime(event.endDateTime);
 
     // console.log('loggedInUserId', loggedInUserId)
-    // console.log('event', event.orginizer._id)
+    // console.log('event', event.organizer._id)
 
 
     return (
@@ -52,7 +52,7 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
                     <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black">{event.title}</p>
 
                     <div className="flex-between w-full">
-                        <p className="p-medium-14 md:p-medium-16 text-grey-600">{event.orginizer.firstName} {event.orginizer.lastName}</p>
+                        <p className="p-medium-14 md:p-medium-16 text-grey-600">{event.organizer.firstName} {event.organizer.lastName}</p>
                     
                         {hasOrderLink && (
                             <Link href={`/orders?eventId=${event._id}`} className="flex gap-2">

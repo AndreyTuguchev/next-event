@@ -1,9 +1,16 @@
 import EventForm from "@/components/shared/EventForm";
+import { getEventById } from "@/lib/actions/event.action";
+import {  } from "@/types";
 import { auth } from "@clerk/nextjs";
 import { redirect } from 'next/navigation'
 
+type UpdateEventProps ={
+    params: {
+        id: string
+    }
+}
 
-export default function UpdateEvent (){
+export default async function UpdateEvent ({ params: {id}} : UpdateEventProps){
 
     const sessionClaims = auth().sessionClaims;
 
@@ -20,6 +27,8 @@ export default function UpdateEvent (){
     // console.log(' userId =', userId)
     // console.log(' auth() =', auth())
 
+    const event = await getEventById(id)
+
     return (
         <>
             <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
@@ -27,7 +36,7 @@ export default function UpdateEvent (){
             </section>
 
             <div className="wrapper my-8">
-                <EventForm userId={ sessionClaims?.userId as string } userRole={userRole} type="Update" />
+                <EventForm userId={ userId } event={event} eventId={event._id} userRole={userRole} type="Update" />
             </div>
         </>
     )
