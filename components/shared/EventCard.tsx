@@ -36,14 +36,14 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
        
                 <span className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4">
                     {!hidePrice && 
-                    <div className="flex gap-2 items-center">
+                    <span className="flex gap-2 items-center">
                         <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 text-green-60 py-1">
                             { event.isFree ? "Free" : `$${event.price}` }
                         </span>
                         <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
                             {event.category.name}
                         </p>
-                    </div>}
+                    </span>}
 
                     <p className="p-medium-16 p-medium-18 text-grey-500">
                         { eventStartData.dateTime }
@@ -51,19 +51,19 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
 
                     <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black">{event.title}</p>
 
-                    <div className="flex-between w-full">
+                    <span className="flex-between w-full">
                         <p className="p-medium-14 md:p-medium-16 text-grey-600">{event.organizer.firstName} {event.organizer.lastName}</p>
                     
-                        {hasOrderLink && (
-                            <Link href={`/orders?eventId=${event._id}`} className="flex gap-2">
-                                <p className="text-primary-500">Order Details</p>
-                                <Image src="/assets/icons/arrow.svg" alt='search' width={10} height={10} />
-                            </Link>
-                        )}
-                    </div>
+                    </span>
                 </span>
-
             </Link>
+            
+            {hasOrderLink && (
+                <Link href={`/orders?eventId=${event._id}`} className="flex gap-2 p-5">
+                    <p className="text-primary-500">Order Details</p>
+                    <Image src="/assets/icons/arrow.svg" alt='search' width={10} height={10} />
+                </Link>
+            )}
             
             { isEventCreator && !hidePrice && (
                 <>
