@@ -93,8 +93,8 @@ export const deleteEvent = async ( { eventId, path } : DeleteEventParams ) => {
         const deletedEvent = await Event.findByIdAndDelete(eventId);
 
         if ( deletedEvent ) {
-            revalidatePath("/");
-            revalidatePath("/events")
+            revalidatePath(path);
+            revalidatePath( path === "/events" ? "/" : "/events" )
         }
 
     }catch(error){
