@@ -105,6 +105,32 @@ export const deleteEvent = async ( { eventId, path } : DeleteEventParams ) => {
 }
 
 
+export const approveEventById = async ( {event }: ApproveEventParams ) => {
+
+    try {
+        await connectToDatabase();
+
+        const updatedEvent = await Event.findByIdAndUpdate(
+            event._id,
+            { ...event, isApproved: true },
+            { new: false });
+
+
+        if ( !updatedEvent ){
+            throw new Error(' approveEventById() updatedEvent not found ');
+        }
+
+        
+        revalidatePath("/")
+        revalidatePath("/events")
+
+        return JSON.parse( JSON.stringify(event));
+
+    }catch(error){
+         handleError(error)
+    }
+}
+
 
 export async function updateEvent({ userId, event, path }: UpdateEventParams) {
     try {
