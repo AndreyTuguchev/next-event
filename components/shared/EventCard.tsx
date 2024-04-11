@@ -40,7 +40,7 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
                         <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 text-green-60 py-1">
                             { event.isFree ? "Free" : `$${event.price}` }
                         </span>
-                        <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500">
+                        <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
                             {event.category.name}
                         </p>
                     </div>}

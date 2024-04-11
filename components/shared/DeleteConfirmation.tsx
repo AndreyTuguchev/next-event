@@ -43,7 +43,7 @@ export default function DeleteConfirmation({ eventId } : { eventId : string }){
                             await deleteEvent({ eventId, path: pathname })
                           })}
                     >Yes</Button>
-                    <Button className="bg-[#2aa523]" onClick={()=> { setDeleteEventState(false) }}>No</Button>
+                    <Button className="bg-[#2aa523] hover:bg-[#3ea839b5]" onClick={()=> { setDeleteEventState(false) }}>No</Button>
                 </div>
             </span>
         </>
