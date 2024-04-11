@@ -67,8 +67,8 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
             
             { isEventCreator && !hidePrice && (
                 <>
-                <div className="absolute flex flex-col right-2 top-2 rounded-xl bg-white p-3 shaodw-sm gap-4 transition-all">
-                    <Link href={`/events/${event._id}/update`}>
+                <div className="absolute flex flex-col right-2 top-2 rounded-xl bg-white shaodw-sm gap-4 transition-all">
+                    <Link className="p-3 " href={`/events/${event._id}/update`}>
                         <Image src="/assets/icons/edit.svg" width={20} height={20} alt="edit icon" />
                     </Link>
                 </div>
