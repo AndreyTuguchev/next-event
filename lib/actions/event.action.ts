@@ -62,7 +62,11 @@ export const getAllEvents = async ( { query, limit = 8, page, category } : GetAl
     try {
         await connectToDatabase();
 
-        const conditions = {}
+        const conditions = {$or: [
+            {
+                isApproved: true,
+            }
+        ]}
 
         const eventsQuery = Event.find( conditions )
             .sort({ createdAt: 'desc'})
