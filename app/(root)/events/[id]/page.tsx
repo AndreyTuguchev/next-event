@@ -1,3 +1,4 @@
+import CheckoutButton from "@/components/shared/CheckoutButton";
 import Collection from "@/components/shared/Collection";
 import { getEventById, getRelatedEventsByCategory } from "@/lib/actions/event.action";
 import { formatDateTime } from "@/lib/utils";
@@ -53,6 +54,8 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
                     </div>
 
                     {/* TODO: Buy Ticket Button */}
+
+                    <CheckoutButton event={event} />
 
                     <div className="flex flex-col gap-5">
                         <div className="flex gap-2 md:gap-3 items-center">

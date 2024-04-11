@@ -1,5 +1,3 @@
-
-
 import { IEvent } from "@/lib/database/models/event.model";
 import { formatDateTime } from "@/lib/utils";
 import Image from "next/image";
@@ -19,13 +17,6 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
     const eventStartData = formatDateTime(event.startDateTime);
 
     const isEventCreator = event.organizer._id.toString() === loggedInUserId;
-
-
-    // const eventEndData = formatDateTime(event.endDateTime);
-
-    // console.log('loggedInUserId', loggedInUserId)
-    // console.log('event', event.organizer._id)
-
 
     return (
         <div className="group flex relative min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">

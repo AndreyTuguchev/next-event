@@ -9,7 +9,7 @@ export interface IEvent extends Document {
     imageUrl: string;
     startDateTime: Date;
     endDateTime: Date;
-    price?: string;
+    price: string;
     isFree: boolean;
     isApproved: boolean;
     url: string;
@@ -25,7 +25,7 @@ const EventSchema = new Schema({
     imageUrl: { type: String, required: true },
     startDateTime: { type: Date, default: Date.now() },
     endDateTime: { type: Date, default: Date.now() },
-    price: { type: String, required: true },
+    price: { type: String, required: true, default: 0 },
     isFree: { type: Boolean, default: false },
     isApproved: { type: Boolean, default: false },
     url: { type: String },
