@@ -1,8 +1,34 @@
+import Collection from "@/components/shared/Collection";
 import { Button } from "@/components/ui/button";
+import { getAllEvents } from "@/lib/actions/event.action";
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs";
+import { useContext } from 'react';
 
-export default function Home() {
+
+export default async function Home() {
+
+  const sessionClaims = auth().sessionClaims;
+
+  let userRole = sessionClaims?.userRole as string;
+
+  if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
+      userRole = "admin";
+  }else{
+      userRole = "user";
+  }
+
+  const loggedInUserId = sessionClaims?.userId as string;
+
+
+  
+  const events = await getAllEvents({
+    query: "",
+    page: 1,
+    category: "",
+    limit: 8
+  });
 
   return (
     <>
@@ -28,6 +54,17 @@ export default function Home() {
           TODO: Search component <br/>
           TODO: CategoryFilter component
         </div>
+
+        <Collection 
+          data={events?.data}
+          emptyTitle="No Events Found"
+          emptyStateSubtext="Come Back Later"
+          collectionType="All_Events"
+          limit={8}
+          page={1}
+          totalPages={2}
+          loggedInUserId={loggedInUserId}
+        />
       </section>
     </>
   );
