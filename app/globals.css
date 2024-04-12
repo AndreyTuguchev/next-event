@@ -73,6 +73,11 @@
   scroll-behavior: smooth;
 }
 
+html {
+  scroll-padding-top: 30px;
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-poppins)
 }

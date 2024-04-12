@@ -7,6 +7,7 @@ import { auth } from "@clerk/nextjs";
 import { useContext } from 'react';
 import Search from "@/components/shared/Search";
 import { SearchParamProps } from "@/types";
+import CategoryFilter from "@/components/shared/CategoryFilter";
 
 
 export default async function Home( { searchParams }: SearchParamProps) {
@@ -34,10 +35,6 @@ export default async function Home( { searchParams }: SearchParamProps) {
     limit: 8
   });
 
-  console.log('events ', events)
-  console.log('searchQuery ', searchQuery)
-  console.log('currentPage ', currentPage)
-
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
@@ -60,8 +57,9 @@ export default async function Home( { searchParams }: SearchParamProps) {
         <h2 className="h2-bold">Trusted by <br/> Thousands of Events</h2>
         <div className="flex w-full flex-col gap-5 md:flex-row">
           <Search placeholder="Search title..." />
-          TODO: CategoryFilter component
+          <CategoryFilter />
         </div>
+        
 
         <Collection 
           data={events?.data}
