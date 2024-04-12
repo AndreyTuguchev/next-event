@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { useContext } from 'react';
+import Search from "@/components/shared/Search";
+import { SearchParamProps } from "@/types";
 
 
-export default async function Home() {
+export default async function Home( { searchParams }: SearchParamProps) {
 
   const sessionClaims = auth().sessionClaims;
 
@@ -21,14 +23,20 @@ export default async function Home() {
 
   const loggedInUserId = sessionClaims?.userId as string;
 
-
+  const currentPage = Number( searchParams?.page ) || 1;
+  const searchQuery = ( searchParams?.query as string ) || '';
+  const currentCategory = ( searchParams?.category as string ) || '';
   
   const events = await getAllEvents({
-    query: "",
-    page: 1,
-    category: "",
+    query: searchQuery,
+    page: currentPage,
+    category: currentCategory,
     limit: 8
   });
+
+  console.log('events ', events)
+  console.log('searchQuery ', searchQuery)
+  console.log('currentPage ', currentPage)
 
   return (
     <>
@@ -44,14 +52,14 @@ export default async function Home() {
             </Button>
           </div>
 
-          <Image src="/assets/images/hero.png" width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
+          <Image priority src="/assets/images/hero.png" width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
         </div>
       </section>
 
       <section id="events" className="wrapper my-8 flex flex-col gap-8 md:gap-12">
         <h2 className="h2-bold">Trusted by <br/> Thousands of Events</h2>
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          TODO: Search component <br/>
+          <Search placeholder="Search title..." />
           TODO: CategoryFilter component
         </div>
 

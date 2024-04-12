@@ -36,7 +36,7 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
         <>
         <section className="flex justify-center bg-primary-50 bg-dotted-pattern bg-contain">
             <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
-                <Image src={event.imageUrl} width={1000} height={1000}  alt="event hero image" className=" min-h-[300px] h-full object-cover object-center" />
+                <Image priority src={event.imageUrl} width={1000} height={1000}  alt="event hero image" className=" min-h-[300px] h-full object-cover object-center" />
 
                 <div className="flex w-full flex-col gap-8 p-5 md:p-10">
                     <div className="flex flex-col gap-6" >
