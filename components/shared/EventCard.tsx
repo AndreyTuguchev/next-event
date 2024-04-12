@@ -16,7 +16,7 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
 
     const eventStartData = formatDateTime(event.startDateTime);
 
-    const isEventCreator = event.organizer._id.toString() === loggedInUserId;
+    const isEventCreator = event.organizer?._id.toString() === loggedInUserId;
 
     return (
         <div className="group flex relative min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
@@ -43,7 +43,7 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
                     <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black">{event.title}</p>
 
                     <span className="flex-between w-full">
-                        <p className="p-medium-14 md:p-medium-16 text-grey-600">{event.organizer.firstName} {event.organizer.lastName}</p>
+                        <p className="p-medium-14 md:p-medium-16 text-grey-600">{event.organizer?.firstName} {event?.organizer.lastName}</p>
                     
                     </span>
                 </span>
