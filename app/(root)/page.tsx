@@ -32,7 +32,7 @@ export default async function Home( { searchParams }: SearchParamProps) {
     query: searchQuery,
     page: currentPage,
     category: currentCategory,
-    limit: 8
+    limit: 6
   });
 
   return (
@@ -66,9 +66,8 @@ export default async function Home( { searchParams }: SearchParamProps) {
           emptyTitle="No Events Found"
           emptyStateSubtext="Come Back Later"
           collectionType="All_Events"
-          limit={8}
-          page={1}
-          totalPages={2}
+          page={currentPage}
+          totalPages={events?.totalPages}
           loggedInUserId={loggedInUserId}
         />
       </section>

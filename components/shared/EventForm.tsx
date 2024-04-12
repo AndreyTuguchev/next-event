@@ -71,7 +71,6 @@ export default function EventForm( { userId, userRole, type, event, eventId } : 
         
             uploadedImageUrl = uploadedImages[0].url
         }    
-            
 
         if(type === 'Create') {
             try {

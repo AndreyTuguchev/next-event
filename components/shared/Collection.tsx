@@ -1,5 +1,6 @@
 import { IEvent } from "@/lib/database/models/event.model"
 import EventCard from "./EventCard"
+import Pagination from "./Pagination"
 
 
 type CollectionProps =  {
@@ -7,14 +8,13 @@ type CollectionProps =  {
     emptyTitle: string
     emptyStateSubtext: string 
     collectionType?: 'Events_Organized' | 'My_Tickets' | 'All_Events'
-    limit: number
     page: number | string
     totalPages?: number
     urlParamName?: string
     loggedInUserId: string
 }
 
-export default function Collection( { data, emptyTitle, emptyStateSubtext, collectionType, limit, page, totalPages, loggedInUserId }: CollectionProps){
+export default function Collection( { data, emptyTitle, emptyStateSubtext, collectionType,  page, totalPages, urlParamName, loggedInUserId }: CollectionProps){
 
     return(
         <>
@@ -33,6 +33,11 @@ export default function Collection( { data, emptyTitle, emptyStateSubtext, colle
                             )
                         })}
                     </ul>
+
+                    { totalPages && totalPages > 1 && (
+                        <Pagination urlParamName={urlParamName} page={page} totalPages={totalPages} />
+                    )}
+
                 </div>
             ): (
                 <div className="flex-center wrapper min-h-[200px] w-full flex-col gap-3 rounded-[14px] bg-grey-50 py-28 text-center">

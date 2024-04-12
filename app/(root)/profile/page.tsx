@@ -36,7 +36,7 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
         
         {/* My Tickets */}
         <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-            <div className="wraper flex items-center justify-center sm:justify-between">
+            <div className="wrapper flex items-center justify-center sm:justify-between">
                 <h3 className="h3-bold text-center sm:text-left">My Tickets</h3>
                 <Button asChild size="lg" className="button hidden sm:flex">
                     <Link href="/#events" >Explore More Events</Link>
@@ -50,7 +50,6 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
                 emptyTitle="No Event tickets found"
                 emptyStateSubtext="You can find any type of event at our website!"
                 collectionType="My_Tickets"
-                limit={3}
                 page={ordersPage}
                 totalPages={orders?.totalPages}
                 urlParamName="ordersPage"
@@ -60,7 +59,7 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
 
          {/* Events organized by me */}
          <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-            <div className="wraper flex items-center justify-center sm:justify-between">
+            <div className="wrapper flex items-center justify-center sm:justify-between">
                 <h3 className="h3-bold text-center sm:text-left">Events Orginized</h3>
                 <Button asChild size="lg" className="button hidden sm:flex">
                     <Link href="/events/create" >Create New Events</Link>
@@ -75,8 +74,7 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
                 emptyTitle="No events created yet..."
                 emptyStateSubtext="You can create new event easily!"
                 collectionType="Events_Organized"
-                limit={6}
-                page={eventsPage}
+                page={ eventsPage }
                 totalPages={ organizedEvents?.totalPages }
                 loggedInUserId={loggedInUserId}
             />

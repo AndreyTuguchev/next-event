@@ -15,9 +15,6 @@ export default function CreateEvent (){
     }
 
     const userId = sessionClaims?.userId as string;
-    
-    // console.log(' userId =', userId)
-    // console.log(' auth() =', auth())
 
     return (
         <>
