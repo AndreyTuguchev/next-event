@@ -70,7 +70,16 @@ export default function EventForm( { userId, userRole, type, event, eventId } : 
             }
         
             uploadedImageUrl = uploadedImages[0].url
-        }    
+        }
+
+        if ( true === values.isFree ){
+            values.price = '0';
+        }
+        
+        if ( Number(values.price) == 0){
+            values.isFree = true;
+            values.price = '0';
+        }
 
         if(type === 'Create') {
             try {
