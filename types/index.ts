@@ -84,6 +84,7 @@ export type CreateUserParams = {
     category: string
     limit: number
     page: number
+    isWebsiteAdmin?: boolean
   }
   
   export type GetEventsByUserParams = {

@@ -12,9 +12,10 @@ type CollectionProps =  {
     totalPages?: number
     urlParamName?: string
     loggedInUserId: string
+    isWebsiteAdmin?: boolean
 }
 
-export default function Collection( { data, emptyTitle, emptyStateSubtext, collectionType,  page, totalPages, urlParamName, loggedInUserId }: CollectionProps){
+export default function Collection( { data, emptyTitle, emptyStateSubtext, collectionType,  page, totalPages, urlParamName, loggedInUserId, isWebsiteAdmin }: CollectionProps){
 
     return(
         <>
@@ -28,7 +29,7 @@ export default function Collection( { data, emptyTitle, emptyStateSubtext, colle
 
                             return (
                                 <li key={event._id} className="flex justify-center">
-                                    <EventCard event={event} hasOrderLink={hasOrderLink} hidePrice={hidePrice} loggedInUserId={loggedInUserId}/>
+                                    <EventCard event={event} hasOrderLink={hasOrderLink} hidePrice={hidePrice} loggedInUserId={loggedInUserId} isWebsiteAdmin={isWebsiteAdmin}/>
                                 </li>
                             )
                         })}

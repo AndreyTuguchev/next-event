@@ -10,13 +10,14 @@ type EventCardProps = {
     hasOrderLink?: boolean;
     hidePrice: boolean;
     loggedInUserId: string;
+    isWebsiteAdmin?: boolean;
 }
 
-export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUserId } : EventCardProps ){
+export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUserId , isWebsiteAdmin } : EventCardProps ){
 
     const eventStartData = formatDateTime(event.startDateTime);
 
-    const isEventCreator = event.organizer?._id.toString() === loggedInUserId;
+    const isEventCreator = isWebsiteAdmin || event.organizer?._id.toString() === loggedInUserId;
 
     return (
         <div className="group flex relative min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
@@ -55,6 +56,15 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
                     <Image src="/assets/icons/arrow.svg" alt='search' width={10} height={10} />
                 </Link>
             )}
+
+            { !event.isApproved && 
+                <>
+                <div className="absolute w-full h-full bg-[#ddd] opacity-[0.7] "></div>
+                <div className="absolute flex flex-col left-2 top-2 rounded-xl bg-white shaodw-sm gap-4 transition-all">
+                    <span className="p-3">Pending Approval</span>
+                </div>
+                </>
+            }
             
             { isEventCreator && !hidePrice && (
                 <>
@@ -66,6 +76,8 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
                     <DeleteConfirmation eventId={event._id} />
                 </>
             )}
+
+    
 
         </div>
     )

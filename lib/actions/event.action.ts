@@ -61,13 +61,18 @@ export const getEventById = async ( eventId: string ) => {
 }
 
 
-export async function getAllEvents({ query, limit = 6, page, category }: GetAllEventsParams) {
+export async function getAllEvents({ query, limit = 6, page, category, isWebsiteAdmin=false }: GetAllEventsParams) {
   try {
     await connectToDatabase()
 
     const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {}
     const categoryCondition = category ? await getCategoryByName(category) : null
-    const conditions = {
+    
+    const conditions = isWebsiteAdmin
+    ? {
+      $and: [  titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
+    }
+    : {
       $and: [ { isApproved: true },  titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
     }
 
