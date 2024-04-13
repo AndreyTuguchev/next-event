@@ -4,10 +4,10 @@ export default authMiddleware({
   publicRoutes: [
     '/', 
     '/events/:id', 
+    '/_next/*', 
     '/api/webhook/clerk',
     '/api/webhook/stripe',
     '/api/uploadthing',
-    '/_next/image',
     '/assets/images/',
     '/assets/icons/',
   ],
@@ -15,8 +15,8 @@ export default authMiddleware({
     ignoredRoutes: [ 
       '/api/webhook/clerk',
       '/api/webhook/stripe',
+      '/_next/*', 
       '/api/uploadthing',
-      '/_next/image',
       '/assets/images/',
       '/assets/icons/',
     ],
