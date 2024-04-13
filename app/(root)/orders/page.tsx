@@ -3,10 +3,31 @@ import { getOrdersByEvent } from '@/lib/actions/order.actions'
 import { formatDateTime, formatPrice } from '@/lib/utils'
 import { SearchParamProps } from '@/types'
 import { IOrderItem } from '@/lib/database/models/order.model'
+import { auth } from '@clerk/nextjs'
+import { getEventById } from '@/lib/actions/event.action'
+import { redirect  } from 'next/navigation'
 
 const Orders = async ({ searchParams }: SearchParamProps) => {
+
   const eventId = (searchParams?.eventId as string) || ''
   const searchText = (searchParams?.query as string) || ''
+  
+  const sessionClaims = auth().sessionClaims;
+
+  let userRole = sessionClaims?.userRole as string;
+
+  if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
+      userRole = "admin";
+  }else{
+      userRole = "user";
+  }
+
+  const loggedInUserId = sessionClaims?.userId as string;
+
+  const currentEventData = await getEventById(eventId);
+
+  if ( loggedInUserId !== currentEventData.organizer._id ) redirect('/');
+
 
   const orders = await getOrdersByEvent({ eventId, searchString: searchText })
 
