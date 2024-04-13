@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Next Event App",
   description: "Next Level Event Management Platform",
   icons:{
-    icon: '/assets/images/logo.svg'
+    icon: '/assets/images/logo.png'
   }
 };
 
