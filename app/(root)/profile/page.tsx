@@ -23,7 +23,7 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
 
 
     const ordersPage = Number( searchParams?.ordersPage ) || 1;
-    const eventsPage = Number( searchParams?.eventsPage ) || 1;
+    const eventsPage = Number( searchParams?.page ) || 1;
 
     const orders = await getOrdersByUser( { userId: loggedInUserId, page: ordersPage });
 

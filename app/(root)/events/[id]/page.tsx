@@ -26,13 +26,14 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
   
     const loggedInUserId = sessionClaims?.userId as string;
 
-    const page = searchParams.page as string;
+    const page = searchParams.page as string || 1;
   
     const relatedEvents = await getRelatedEventsByCategory({
         categoryId: event.category._id,
         eventId: event._id,
         page,
     })
+
 
     return (
         <>
