@@ -20,7 +20,7 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation"
 import { createEvent, updateEvent } from "@/lib/actions/event.action"
 import { IEvent } from "@/lib/database/models/event.model"
-
+import { Switch } from "@/components/ui/switch"
 
 
 
@@ -56,16 +56,14 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
 
     async function onSubmit(values: z.infer<typeof eventFormSchema>) {
 
-        console.log('form submitted')
-        console.log('files =', files);
+        // console.log('form submitted')
+        // console.log('files =', files);
 
         let uploadedImageUrl = values.imageUrl;
 
         if(files.length > 0) {
             const uploadedImages = await startUpload(files)
         
-            console.log('uploadedImageUrl =', uploadedImageUrl )
-
             if(!uploadedImages) {
                 return
             }
@@ -77,12 +75,12 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
             values.price = '0';
         }
         
-        if ( Number(values.price) == 0){
+        if ( Number(values.price) == 0 ){
             values.isFree = true;
             values.price = '0';
         }
 
-        if(type === 'Create') {
+        if( 'Create' === type ) {
             try {
               const newEvent = await createEvent({
                 event: { ...values, imageUrl: uploadedImageUrl },
@@ -95,12 +93,12 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                 router.push(`/events/${newEvent._id}`)
               }
             } catch (error) {
-              console.log(error);
+            //   console.log(error);
             }
         }
 
 
-        if(type === 'Update') {
+        if( 'Update' === type ) {
 
             if( !eventId) {
                 router.back();
@@ -120,12 +118,12 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                 router.push(`/events/${updatedEvent._id}`)
               }
             } catch (error) {
-              console.log(error);
+            //   console.log(error);
             }
         }
 
-        console.log(values)
-        console.log(values.imageUrl)
+        // console.log(values)
+        // console.log(values.imageUrl)
       }
 
       
@@ -133,7 +131,30 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
 
     return (
         <Form {...form}>
-        <form onSubmit={ form.handleSubmit(onSubmit) } className="flex flex-col gap-5">
+        <form onSubmit={ form.handleSubmit(onSubmit) } className="flex flex-col gap-5 mb-[200px]">
+
+            {isWebsiteAdmin && 
+            <div className="flex flex-col gap-5 md:flex-row">
+                <FormField
+                    control={form.control}
+                    name="isApproved"
+                    render={({ field }) => (
+                    <FormItem >
+                        <FormControl>
+                            <div className="flex items-center">
+                                <Switch onCheckedChange={field.onChange} checked={field.value}  className="form-switch mr-2 border-2 border-primary-500 !pb-[2px] h-7 items-centers  " />
+                                <label htmlFor="isApproved" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{field.value ? "Event Approved" : "Pending Approval"}</label>
+                            </div>
+                        </FormControl>
+                        
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+            </div>
+            }
+
+
 
             <div className="flex flex-col gap-5 md:flex-row">
                 <FormField
@@ -185,7 +206,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     control={form.control}
                     name="imageUrl"
                     render={({ field }) => (
-                    <FormItem className="w-full ">
+                    <FormItem className="w-full cursor-pointer">
                         <FormControl className="h-72">
                             <FileUploader onFieldChange={field.onChange} imageUrl={field.value} setFiles={setFiles} />
                         </FormControl>

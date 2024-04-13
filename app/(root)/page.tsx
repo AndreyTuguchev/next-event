@@ -15,6 +15,7 @@ export default async function Home( { searchParams }: SearchParamProps) {
   const sessionClaims = auth().sessionClaims;
 
   let userRole = sessionClaims?.userRole as string;
+  const isWebsiteAdmin = "super_admin" === userRole;
 
   if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
       userRole = "admin";
@@ -69,6 +70,7 @@ export default async function Home( { searchParams }: SearchParamProps) {
           page={currentPage}
           totalPages={events?.totalPages}
           loggedInUserId={loggedInUserId}
+          isWebsiteAdmin={isWebsiteAdmin}
         />
       </section>
     </>

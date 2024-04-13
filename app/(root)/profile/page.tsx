@@ -46,14 +46,14 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
 
         <section className="wrapper my-8">
             <Collection 
-                data={orderedEvents}
+                data={ orderedEvents }
                 emptyTitle="No Event tickets found"
                 emptyStateSubtext="You can find any type of event at our website!"
                 collectionType="My_Tickets"
-                page={ordersPage}
-                totalPages={orders?.totalPages}
+                page={ ordersPage }
+                totalPages={ orders?.totalPages }
                 urlParamName="ordersPage"
-                loggedInUserId={loggedInUserId}
+                loggedInUserId={ loggedInUserId }
             />
         </section>
 
@@ -62,7 +62,7 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
             <div className="wrapper flex items-center justify-center sm:justify-between">
                 <h3 className="h3-bold text-center sm:text-left">Events Orginized</h3>
                 <Button asChild size="lg" className="button hidden sm:flex">
-                    <Link href="/events/create" >Create New Events</Link>
+                    <Link href="/events/create" >Create New Event</Link>
                 </Button>
             </div>
         </section>
@@ -76,7 +76,7 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
                 collectionType="Events_Organized"
                 page={ eventsPage }
                 totalPages={ organizedEvents?.totalPages }
-                loggedInUserId={loggedInUserId}
+                loggedInUserId={ loggedInUserId }
             />
         </section>
         

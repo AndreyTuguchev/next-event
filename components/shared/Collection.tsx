@@ -17,8 +17,6 @@ type CollectionProps =  {
 
 export default function Collection( { data, emptyTitle, emptyStateSubtext, collectionType,  page, totalPages, urlParamName, loggedInUserId, isWebsiteAdmin }: CollectionProps){
     
-    // console.log( ' data[0]  ', data[0] )
-
     return(
         <>
             { null != data[0] && data.length > 0 ? (
@@ -28,8 +26,6 @@ export default function Collection( { data, emptyTitle, emptyStateSubtext, colle
                             
                             const hasOrderLink = 'Events_Organized' === collectionType;
                             const hidePrice = "My_Tickets" === collectionType;
-
-                            console.log('event =', event)
 
                             return (
                                 <li key={event?._id} className="flex justify-center">

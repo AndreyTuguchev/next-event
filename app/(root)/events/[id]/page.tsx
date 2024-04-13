@@ -17,6 +17,8 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
     const sessionClaims = auth().sessionClaims;
 
     let userRole = sessionClaims?.userRole as string;
+    const isWebsiteAdmin = "super_admin" === userRole;
+
   
     if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
         userRole = "admin";
@@ -39,7 +41,9 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
         <>
         <section className="flex justify-center bg-primary-50 bg-dotted-pattern bg-contain">
             <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
+                <div>
                 <Image priority src={event.imageUrl} width={1000} height={1000}  alt="event hero image" className=" min-h-[300px] h-full object-cover object-center" />
+                </div>
 
                 <div className="flex w-full flex-col gap-8 p-5 md:p-10">
                     <div className="flex flex-col gap-6" >
@@ -72,7 +76,7 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
                         <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
                     </div>
                 
-                    <p className="p-bold-20 text-gray-600">What You will learn:</p>
+                    <p className="p-bold-20 text-gray-600">What You Will Get:</p>
                     <p className="break-words p-medium-16 lg:p-regular-18">{event.description}</p>
                     {event.url && <a href={event.url} target="_blank" rel="nofollow" className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">{event.url}</a>}
                 </div>
@@ -90,6 +94,7 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
                 page={page}
                 totalPages={relatedEvents?.totalPages}
                 loggedInUserId={loggedInUserId}
+                isWebsiteAdmin={isWebsiteAdmin}
             />
         </section>
         </>
