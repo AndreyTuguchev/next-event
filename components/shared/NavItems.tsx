@@ -19,7 +19,7 @@ export default function NavItems ({ websiteAdmin } : { websiteAdmin : boolean })
                 )
             })}
             {websiteAdmin && (
-                <li className={ ` ${ "/admin" === pathname && 'text-primary-500'} flex-center py-[10px] p-medium-16 whitespace-nowrap w-full lg:absolute relative`}>
+                <li className={ ` ${ "/admin" === pathname && 'text-primary-500'} flex-center p-medium-16 whitespace-nowrap right-[150px] px-2 py-2 lg:absolute relative`}>
                     <Link href="/admin" >Admin</Link> 
                 </li>
             )}
