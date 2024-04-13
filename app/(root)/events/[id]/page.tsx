@@ -66,13 +66,13 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
 
                     <div className="flex flex-col gap-5">
                         <div className="flex gap-2 md:gap-3 items-center">
-                            <Image src="/assets/icons/calendar.svg" width={32} height={32} alt="calendar" className="filter-grey"  />
+                            <Image src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/calendar.svg`} width={32} height={32} alt="calendar" className="filter-grey"  />
                             <p>{eventStartData.dateOnly} - {eventStartData.timeOnly} / {eventEndData.dateOnly} - {eventEndData.timeOnly} </p>
                         </div>
                     </div>
 
                     <div className="p-regular-20 flex items-center gap-3">
-                        <Image width={32} height={32} src="/assets/icons/location.svg" alt="location" />
+                        <Image width={32} height={32} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/location.svg`} alt="location" />
                         <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
                     </div>
                 

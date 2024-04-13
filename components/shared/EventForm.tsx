@@ -225,7 +225,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src="/assets/icons/location-grey.svg" alt="location icon" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/location-grey.svg`} alt="location icon" />
                                 <Input placeholder="Event Location or Online" {...field} className="input-field" />
                             </div>
                         </FormControl>
@@ -244,7 +244,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src="/assets/icons/calendar.svg" alt="calendar icon" className="filter-grey" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/calendar.svg`} alt="calendar icon" className="filter-grey" />
                                 <p className="ml-3 whitespace-nowrap text-grey-500">Start Date:</p>
                                 <DatePicker 
                                     selected={field.value} 
@@ -269,7 +269,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src="/assets/icons/calendar.svg" alt="calendar icon" className="filter-grey" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/calendar.svg`} alt="calendar icon" className="filter-grey" />
                                 <p className="ml-3 whitespace-nowrap text-grey-500">End Date:</p>
                                 <DatePicker 
                                     selected={field.value} 
@@ -296,7 +296,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src="/assets/icons/dollar.svg" alt="dollar icon" className="filter-grey" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/dollar.svg`} alt="dollar icon" className="filter-grey" />
                                 <Input type="number" placeholder="price" {...field} className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 " />
                                 <FormField
                                     control={form.control}
@@ -329,7 +329,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src="/assets/icons/link.svg" alt="link icon" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/link.svg`} alt="link icon" />
                                 <Input placeholder="URL" {...field} className="input-field" />
                             </div>
                         </FormControl>

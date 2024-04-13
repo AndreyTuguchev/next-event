@@ -50,7 +50,7 @@ export default async function Home( { searchParams }: SearchParamProps) {
             </Button>
           </div>
 
-          <Image priority src="/assets/images/hero.png" width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
+          <Image priority src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/images/hero.png`} width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
         </div>
       </section>
 
