@@ -16,20 +16,24 @@ type CollectionProps =  {
 }
 
 export default function Collection( { data, emptyTitle, emptyStateSubtext, collectionType,  page, totalPages, urlParamName, loggedInUserId, isWebsiteAdmin }: CollectionProps){
+    
+    // console.log( ' data[0]  ', data[0] )
 
     return(
         <>
-            {data.length > 0 ? (
+            { null != data[0] && data.length > 0 ? (
                 <div className="flex flex-col items-center gap-10">
                     <ul className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
                         {data.map((event) => {
-
+                            
                             const hasOrderLink = 'Events_Organized' === collectionType;
                             const hidePrice = "My_Tickets" === collectionType;
 
+                            console.log('event =', event)
+
                             return (
-                                <li key={event._id} className="flex justify-center">
-                                    <EventCard event={event} hasOrderLink={hasOrderLink} hidePrice={hidePrice} loggedInUserId={loggedInUserId} isWebsiteAdmin={isWebsiteAdmin}/>
+                                <li key={event?._id} className="flex justify-center">
+                                    {null !== event && <EventCard event={event} hasOrderLink={hasOrderLink} hidePrice={hidePrice} loggedInUserId={loggedInUserId} isWebsiteAdmin={isWebsiteAdmin}/> }
                                 </li>
                             )
                         })}
