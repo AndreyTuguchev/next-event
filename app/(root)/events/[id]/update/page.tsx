@@ -15,6 +15,7 @@ export default async function UpdateEvent ({ params: {id}} : UpdateEventProps){
     const sessionClaims = auth().sessionClaims;
 
     let userRole = sessionClaims?.userRole as string;
+    const isWebsiteAdmin = "super_admin" === userRole;
 
     if ( null != userRole  && userRole.toLowerCase().endsWith('admin')) {
         userRole = "admin";
@@ -23,9 +24,6 @@ export default async function UpdateEvent ({ params: {id}} : UpdateEventProps){
     }
 
     const userId = sessionClaims?.userId as string;
-    
-    // console.log(' userId =', userId)
-    // console.log(' auth() =', auth())
 
     const event = await getEventById(id)
 
@@ -36,7 +34,7 @@ export default async function UpdateEvent ({ params: {id}} : UpdateEventProps){
             </section>
 
             <div className="wrapper my-8">
-                <EventForm userId={ userId } event={event} eventId={event._id} userRole={userRole} type="Update" />
+                <EventForm userId={ userId } event={event} eventId={event._id} userRole={userRole} type="Update" isWebsiteAdmin={isWebsiteAdmin} />
             </div>
         </>
     )

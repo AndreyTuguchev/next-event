@@ -143,13 +143,13 @@ export const approveEventById = async ( {event }: ApproveEventParams ) => {
 }
 
 
-export async function updateEvent({ userId, event, path }: UpdateEventParams) {
+export async function updateEvent({ userId, event, path, isWebsiteAdmin=false  }: UpdateEventParams) {
     try {
       await connectToDatabase()
   
     const eventToUpdate = await Event.findById(event._id)
 
-      if (!eventToUpdate || eventToUpdate.organizer.toHexString() !== userId) {
+      if ( !isWebsiteAdmin && (!eventToUpdate || eventToUpdate.organizer.toHexString() !== userId) ) {
         throw new Error('Unauthorized or event not found')
       }
   

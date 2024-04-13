@@ -56,6 +56,8 @@ export type CreateUserParams = {
       url: string
     }
     path: string
+    isWebsiteAdmin?: boolean
+
   }
   
   export type ApproveEventParams = {

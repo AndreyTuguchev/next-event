@@ -24,8 +24,7 @@ export default async function AdminPage({ searchParams } : SearchParamProps){
     });
 
     const currentPage = Number( searchParams?.page ) || 1;
-
-
+    
     return (
         <section className="wrapper my-8">
             <Collection 
@@ -37,6 +36,7 @@ export default async function AdminPage({ searchParams } : SearchParamProps){
                 totalPages={events?.totalPages}
                 urlParamName="ordersPage"
                 loggedInUserId={userId}
+                isWebsiteAdmin={isWebsiteAdmin}
             />
         </section>
     )

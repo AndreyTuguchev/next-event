@@ -30,11 +30,12 @@ type EventFormProps = {
     type: "Create" | "Update";
     event?: IEvent,
     eventId?: string;
+    isWebsiteAdmin?: boolean;
 }
 
 
 
-export default function EventForm( { userId, userRole, type, event, eventId } : EventFormProps ){
+export default function EventForm( { userId, userRole, type, event, eventId, isWebsiteAdmin=false } : EventFormProps ){
 
     const [ files, setFiles ] = useState<File[]>([]);
     const { startUpload } = useUploadThing( "imageUploader" );
@@ -110,7 +111,8 @@ export default function EventForm( { userId, userRole, type, event, eventId } : 
                 const updatedEvent = await updateEvent({
                     userId,
                     event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
-                    path: `/events/${eventId}`
+                    path: `/events/${eventId}`,
+                    isWebsiteAdmin
                   })
       
               if( updatedEvent ) {
