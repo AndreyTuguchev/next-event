@@ -4,6 +4,8 @@ import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
+// disable page caching for all admin pages.
+export const dynamic = 'force-dynamic';
 
 export default async function AdminPage({ searchParams } : SearchParamProps){
     const sessionClaims = auth().sessionClaims;
