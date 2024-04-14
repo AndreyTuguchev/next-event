@@ -349,3 +349,9 @@ body {
 .react-datepicker__time-list-item--selected {
   background-color: #0b2a81 !important;
 }
+
+@media (max-width: 480px) {
+  .react-datepicker-popper{
+    left: -59px !important;
+  }
+}
