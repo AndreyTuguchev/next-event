@@ -39,6 +39,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
 
     const [ files, setFiles ] = useState<File[]>([]);
     const { startUpload } = useUploadThing( "imageUploader" );
+
     
     const initialValues = event && type === 'Update' ? 
                         {...event,

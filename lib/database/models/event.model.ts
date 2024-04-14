@@ -5,7 +5,7 @@ export interface IEvent extends Document {
     title: string;
     description?: string;
     location?: string;
-    createdAt: Date;
+    createdAt: number;
     imageUrl: string;
     startDateTime: Date;
     endDateTime: Date;
@@ -21,7 +21,7 @@ const EventSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String },
     location: { type: String },
-    createdAt: { type: Date, default: Date.now() },
+    createdAt: { type: Number, default: Date.now() },
     imageUrl: { type: String, required: true },
     startDateTime: { type: Date, default: Date.now() },
     endDateTime: { type: Date, default: Date.now() },

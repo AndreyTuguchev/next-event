@@ -18,6 +18,7 @@ export const headerLinks = [
     description: '',
     location: '',
     imageUrl: '',
+    createdAt: 0,
     startDateTime: new Date(),
     endDateTime: new Date(),
     categoryId: '',

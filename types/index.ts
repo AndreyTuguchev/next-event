@@ -13,6 +13,9 @@ export type CreateUserParams = {
     amountOfBlockedActions : number
     listOfBlockedTime : string
     userRole: string
+    eventsApprovedByAdmin : number
+    eventsRejectedByAdmin : number
+    eventsPending: number
   }
   
   export type UpdateUserParams = {
@@ -38,6 +41,7 @@ export type CreateUserParams = {
       url: string
     }
     path: string
+    isWebsiteAdmin?: boolean
   }
   
   export type UpdateEventParams = {

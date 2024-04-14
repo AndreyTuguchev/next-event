@@ -28,6 +28,6 @@ export const eventFormSchema = z.object({
     isFree: z.boolean(),
     url: z.string().url().or(z.literal('')),
     isApproved: z.boolean().or(z.literal(false)),
-    
+    createdAt: z.number().or(z.literal(0))
 })
 
