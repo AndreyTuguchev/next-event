@@ -39,6 +39,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
 
     const [ files, setFiles ] = useState<File[]>([]);
     const { startUpload } = useUploadThing( "imageUploader" );
+    const [ notificationAlertState, setNotificationAlertState] = useState("");
 
     
     const initialValues = event && type === 'Update' ? 
@@ -54,6 +55,9 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
     });
 
     const router = useRouter();
+
+
+  
 
     async function onSubmit(values: z.infer<typeof eventFormSchema>) {
 
@@ -87,7 +91,12 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                 event: { ...values, imageUrl: uploadedImageUrl },
                 userId,
                 path: '/profile'
-              })
+              });
+
+              if ( newEvent?.toString().startsWith("Error") || newEvent?.toString().startsWith("Alert") ){
+                setNotificationAlertState(newEvent?.toString());
+                return;
+              }
       
               if(newEvent) {
                 form.reset();
@@ -132,8 +141,19 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
 
     return (
         <Form {...form}>
-        <form onSubmit={ form.handleSubmit(onSubmit) } className="flex flex-col gap-5 mb-[200px]">
+        <form onSubmit={ form.handleSubmit(onSubmit) } className="flex flex-col gap-5 mb-[200px] relative pt-[30px]">
 
+            {  
+                notificationAlertState?.startsWith("Error") ?
+                <FormSubmitionAlert alertText={notificationAlertState} customCssClass="text-[#f00]" /> 
+                : 
+                notificationAlertState?.startsWith("Alert") || notificationAlertState?.startsWith("Unknown") ? 
+                <FormSubmitionAlert alertText={notificationAlertState} customCssClass="text-[#ff9b00]" /> 
+                :
+                notificationAlertState?.startsWith("Success") && 
+                <FormSubmitionAlert alertText={notificationAlertState} customCssClass="text-[#1200ff]" />
+            }
+            
             {isWebsiteAdmin && 
             <div className="flex flex-col gap-5 md:flex-row">
                 <FormField
@@ -226,7 +246,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/location-grey.svg`} alt="location icon" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/location-grey.svg`} alt="location icon" />
                                 <Input placeholder="Event Location or Online" {...field} className="input-field" />
                             </div>
                         </FormControl>
@@ -245,7 +265,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/calendar.svg`} alt="calendar icon" className="filter-grey" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/calendar.svg`} alt="calendar icon" className="filter-grey" />
                                 <p className="ml-3 whitespace-nowrap text-grey-500">Start Date:</p>
                                 <DatePicker 
                                     selected={field.value} 
@@ -270,7 +290,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/calendar.svg`} alt="calendar icon" className="filter-grey" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/calendar.svg`} alt="calendar icon" className="filter-grey" />
                                 <p className="ml-3 whitespace-nowrap text-grey-500">End Date:</p>
                                 <DatePicker 
                                     selected={field.value} 
@@ -297,7 +317,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/dollar.svg`} alt="dollar icon" className="filter-grey" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/dollar.svg`} alt="dollar icon" className="filter-grey" />
                                 <Input type="number" placeholder="price" {...field} className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 " />
                                 <FormField
                                     control={form.control}
@@ -330,7 +350,7 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
                     <FormItem className="w-full ">
                         <FormControl>
                             <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                                <Image width={24} height={24} src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/link.svg`} alt="link icon" />
+                                <Image width={24} height={24} src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/link.svg`} alt="link icon" />
                                 <Input placeholder="URL" {...field} className="input-field" />
                             </div>
                         </FormControl>
@@ -349,5 +369,16 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
           </Button>
         </form>
       </Form>
+    )
+}
+
+
+
+export function FormSubmitionAlert( { alertText, customCssClass } : {alertText: string, customCssClass: string} ){
+
+    return (
+        <span className={`absolute top-[-38px] md:top-[-27px] flex justify-center text-center w-full p-2 ${customCssClass}`}>
+            {alertText}
+        </span>
     )
 }

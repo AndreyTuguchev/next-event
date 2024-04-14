@@ -14,7 +14,7 @@ export default function Header(){
         <header className="w-full border-b">
             <div className="wrapper flex items-center justify-between relative" >
                 <Link href="/" className="w-36">
-                    <Image priority src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/images/logo.png`} width={277} height={277} className="max-w-[55px] h-auto" alt="Event App Logo" />
+                    <Image priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/images/logo.png`} width={277} height={277} className="max-w-[55px] h-auto" alt="Event App Logo" />
                 </Link>
 
                 <SignedIn>

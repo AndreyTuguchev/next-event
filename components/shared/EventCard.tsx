@@ -19,6 +19,8 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
 
     const isEventCreator = isWebsiteAdmin || event.organizer?._id.toString() === loggedInUserId;
 
+    
+
     return (
         <div className="group flex relative min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
             <Link href={`/events/${event._id}`} className="w-full h-full">
@@ -53,7 +55,7 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
             {hasOrderLink && (
                 <Link href={`/orders?eventId=${event._id}`} className="flex gap-2 p-5">
                     <p className="text-primary-500">Order Details</p>
-                    <Image src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/arrow.svg`} alt='search' width={10} height={10} />
+                    <Image src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/arrow.svg`} alt='search' width={10} height={10} />
                 </Link>
             )}
 
@@ -70,7 +72,7 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
                 <>
                 <div className="absolute flex flex-col right-2 top-2 rounded-xl bg-white shaodw-sm gap-4 transition-all">
                     <Link className="p-3 " href={`/events/${event._id}/update`}>
-                        <Image src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/edit.svg`} width={20} height={20} alt="edit icon" />
+                        <Image src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/edit.svg`} width={20} height={20} alt="edit icon" />
                     </Link>
                 </div>
                     <DeleteConfirmation eventId={event._id} />

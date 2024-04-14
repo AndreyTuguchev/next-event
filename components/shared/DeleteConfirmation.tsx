@@ -24,11 +24,13 @@ export default function DeleteConfirmation({ eventId } : { eventId : string }){
 
     }, [deleteEventState])
 
+    console.log('process.env.NEXT_PUBLIC_CDN_URL ', process.env.NEXT_PUBLIC_CDN_URL)
+
     return (
         <div className={`${ !deleteEventState && 'absolute top-14 bg-white'} cursor-pointer flex flex-col right-2 overflow-hidden rounded-xl  shaodw-sm gap-4 transition-all z-[5]`}>
 
         <span className={` ${ deleteEventState ? `!hidden` : ""} p-3`} onClick={()=> { setDeleteEventState(true); }}>
-        <Image src={`${process.env.NEXT_IMAGES_CDN_URL}/assets/icons/delete.svg`} alt="edit" width={20} height={20}  />
+        <Image src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/icons/delete.svg`} alt="edit" width={20} height={20}  />
         </span>
         
         { deleteEventState && (
