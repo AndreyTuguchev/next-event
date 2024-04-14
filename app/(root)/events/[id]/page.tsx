@@ -39,7 +39,7 @@ export default async function EventPage({ params: { id }, searchParams } : Searc
 
     return (
         <>
-        <section className="flex justify-center bg-primary-50 bg-dotted-pattern bg-contain">
+        <section className="flex justify-center bg-primary-50 bg-contain">
             <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
                 <div>
                 <Image priority src={event.imageUrl} width={1000} height={1000}  alt="event hero image" className=" min-h-[300px] h-full object-cover object-center" />
