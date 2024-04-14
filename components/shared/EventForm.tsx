@@ -84,6 +84,8 @@ export default function EventForm( { userId, userRole, type, event, eventId, isW
             values.isFree = true;
             values.price = '0';
         }
+        
+        values.price = parseInt(values.price, 10).toString();
 
         if( 'Create' === type ) {
             try {
