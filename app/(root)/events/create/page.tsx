@@ -1,6 +1,7 @@
 import EventForm from "@/components/shared/EventForm";
 import { isValidUserAction } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 
 export default async function CreateEvent (){
@@ -17,15 +18,13 @@ export default async function CreateEvent (){
 
     const userId = sessionClaims?.userId as string;
 
-    // get all events created by this user and check amount of not approved events.
+    if ( null == userId ) redirect('/sign-in')
 
     const isValidUserActionResult = await isValidUserAction(userId);
 
-    console.log(isValidUserActionResult)
-
     return (
         <>
-            <section className="bg-primary-50 bg-cover bg-center py-5 md:py-10">
+            <section className="!pt-[130px] bg-primary-50 bg-cover bg-center pb-5 md:py-10">
                 <h3 className="wrapper h3-bold text-center sm:text-left">Create Event</h3>
             </section>
 

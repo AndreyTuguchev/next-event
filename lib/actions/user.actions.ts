@@ -87,6 +87,8 @@ export async function isValidUserAction( userId: string ) {
   try {
     await connectToDatabase()
 
+    if ( null == userId ) return "Error! user not found" 
+
     const user = await User.findById(userId)
 
     if ( user.eventsCreatedAmount === user.maxEventsAllowed ){
