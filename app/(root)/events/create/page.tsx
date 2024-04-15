@@ -1,8 +1,9 @@
 import EventForm from "@/components/shared/EventForm";
+import { isValidUserAction } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
 
 
-export default function CreateEvent (){
+export default async function CreateEvent (){
 
     const sessionClaims = auth().sessionClaims;
 
@@ -18,6 +19,10 @@ export default function CreateEvent (){
 
     // get all events created by this user and check amount of not approved events.
 
+    const isValidUserActionResult = await isValidUserAction(userId);
+
+    console.log(isValidUserActionResult)
+
     return (
         <>
             <section className="bg-primary-50 bg-cover bg-center py-5 md:py-10">
@@ -25,7 +30,11 @@ export default function CreateEvent (){
             </section>
 
             <div className="wrapper my-8">
-                <EventForm userId={userId} userRole={userRole} type="Create" />
+            { isValidUserActionResult?.startsWith("Error") 
+            ? <div className={`pt-[50px] px-5 text-center text-lg text-[#f00] font-semibold`}>{isValidUserActionResult}</div> 
+            : <EventForm userId={userId} userRole={userRole} type="Create" />
+            }
+                
             </div>
         </>
     )

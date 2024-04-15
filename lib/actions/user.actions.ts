@@ -79,3 +79,28 @@ export async function deleteUser(clerkId: string) {
     handleError(error)
   }
 }
+
+
+
+
+export async function isValidUserAction( userId: string ) {
+  try {
+    await connectToDatabase()
+
+    const user = await User.findById(userId)
+
+    if ( user.eventsCreatedAmount === user.maxEventsAllowed ){
+      return "Error! You've reached the maximum number of events allowed for your account.";
+    }
+    
+    if ( "super_admin" !== user.userRole && user.eventsPending >= 2 ){
+      return "Error! You cannot have more than two events pending. Please wait for approval...";
+    }
+
+    if (!user) throw new Error('User not found')
+
+    return ""
+  } catch (error) {
+    handleError(error)
+  }
+}
