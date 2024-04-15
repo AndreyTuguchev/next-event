@@ -60,7 +60,7 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
          {/* Events organized by me */}
          <section className="bg-primary-50 bg-cover bg-center py-5 md:py-10">
             <div className="wrapper flex items-center justify-center sm:justify-between">
-                <h3 className="h3-bold text-center sm:text-left">Events Orginized</h3>
+                <h2 className="h3-bold text-center sm:text-left">Events Orginized</h2>
                 <Button asChild size="lg" className="button hidden sm:flex">
                     <Link href="/events/create" >Create New Event</Link>
                 </Button>
@@ -68,7 +68,6 @@ export default async function ProfilePage ({ searchParams } : SearchParamProps) 
         </section>
 
          <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
-            <h2 className="h2-bold">Related Events</h2>
             <Collection 
                 data={organizedEvents?.data}
                 emptyTitle="No events created yet..."
