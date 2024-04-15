@@ -7,6 +7,7 @@ import User from "../database/models/user.model";
 import Event from "../database/models/event.model";
 import Category from "../database/models/category.model";
 import { revalidatePath } from "next/cache";
+import { updateUser } from "./user.actions";
 
 const populateEvent = async ( query: any ) => {
     return query
@@ -19,7 +20,7 @@ const getCategoryByName = async (name: string) => {
 }
 
 
-export const createEvent = async ({ event, userId, path } : CreateEventParams ) => {
+export const createEvent = async ({ event, userId, path, isWebsiteAdmin=false } : CreateEventParams ) => {
 
     try {
         await connectToDatabase();
@@ -27,12 +28,34 @@ export const createEvent = async ({ event, userId, path } : CreateEventParams ) 
         const organizer = await User.findById(userId);
 
         if ( !organizer ) {
-            throw new Error('organizer not found');
+          throw new Error('organizer not found');
+        }
+        
+
+        if ( organizer.eventsCreatedAmount === organizer.maxEventsAllowed ){
+          return "Error! You've reached the maximum number of events allowed for your account.";
+        }
+        
+        if ( "super_admin" !== organizer.userRole && organizer.eventsPending >= 2 ){
+          return "Error! You cannot have more than two events pending. Please wait for approval...";
         }
 
-        const newEvent = await Event.create({ ...event, category: event.categoryId, organizer: userId });
+        const currentTime = Date.now();
+        
+        const newEvent = await Event.create({ ...event, category: event.categoryId, organizer: userId, createdAt: currentTime });
+                
+        organizer.eventsPending += 1;
+        organizer.eventsCreatedAmount += 1
+        
+        "" == organizer.listOfEventsCreatedTime ?
+        organizer.listOfEventsCreatedTime += currentTime.toString() : 
+        organizer.listOfEventsCreatedTime += ";" + currentTime.toString()
+        
+        const updatedUser = await updateUser( organizer.clerkId, organizer );
 
-
+        revalidatePath('/events/create');
+        revalidatePath("/admin")
+        
         return JSON.parse( JSON.stringify(newEvent));
 
     }catch (error) {
@@ -103,11 +126,46 @@ export const deleteEvent = async ( { eventId, path } : DeleteEventParams ) => {
     try {
         await connectToDatabase();
 
-        const deletedEvent = await Event.findByIdAndDelete(eventId);
+        const deletedEvent = await Event.findByIdAndDelete(eventId).populate({
+          path: "organizer",
+        });
+
+
+        console.log( 'deletedEvent = ', deletedEvent );
+
 
         if ( deletedEvent ) {
-            revalidatePath(path);
-            revalidatePath( path === "/events" ? "/" : "/events" )
+          
+          if ( false === deletedEvent.isApproved ){
+            deletedEvent.organizer.eventsPending -= 1;
+          }
+          
+          deletedEvent.organizer.eventsCreatedAmount -= 1
+                      
+          if ( deletedEvent.createdAt > 1710107350) {
+
+            deletedEvent.organizer.listOfEventsCreatedTime = deletedEvent.organizer.listOfEventsCreatedTime.split(deletedEvent.createdAt).join('').replace(";;", ";");
+            
+            if ( ";" === deletedEvent.organizer.listOfEventsCreatedTime ) {
+              deletedEvent.organizer.listOfEventsCreatedTime = "" ;
+            }
+            
+            if ( ";" === deletedEvent.organizer.listOfEventsCreatedTime[0] ) {
+              deletedEvent.organizer.listOfEventsCreatedTime = deletedEvent.organizer.listOfEventsCreatedTime.substr(1);
+            }
+            
+            if ( ";" === deletedEvent.organizer.listOfEventsCreatedTime[deletedEvent.organizer.listOfEventsCreatedTime.length - 1] ) {
+              deletedEvent.organizer.listOfEventsCreatedTime = deletedEvent.organizer.listOfEventsCreatedTime.substr(0, deletedEvent.organizer.listOfEventsCreatedTime.length - 1);
+            }
+            
+          }
+
+          const updatedUser = await updateUser( deletedEvent.organizer.clerkId, {...deletedEvent.organizer} )
+
+          revalidatePath(path);
+          revalidatePath( path === '/events' ? '/' : '/events' )
+          revalidatePath('/events/create');
+          revalidatePath('/admin')
         }
 
     }catch(error){
@@ -134,6 +192,7 @@ export const approveEventById = async ( {event }: ApproveEventParams ) => {
         
         revalidatePath("/")
         revalidatePath("/events")
+        revalidatePath("/admin")
 
         return JSON.parse( JSON.stringify(event));
 
@@ -176,7 +235,7 @@ export async function updateEvent({ userId, event, path, isWebsiteAdmin=false  }
     try {
       await connectToDatabase()
   
-      const skipAmount = (Number(page) - 1) * limit
+      const skipAmount = ( Number(page) - 1 ) * limit
       const conditions = { $and: [{ category: categoryId }, { _id: { $ne: eventId } }, { isApproved: true }] }
   
       const eventsQuery = Event.find(conditions)
@@ -198,7 +257,7 @@ export async function updateEvent({ userId, event, path, isWebsiteAdmin=false  }
     try {
       await connectToDatabase()
   
-      const conditions = { organizer: userId, isApproved: true }
+      const conditions = { organizer: userId }
       const skipAmount = ( page - 1 ) * limit
   
       const eventsQuery = Event.find(conditions)
