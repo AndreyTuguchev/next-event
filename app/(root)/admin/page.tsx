@@ -1,4 +1,6 @@
+import CategoryFilter from "@/components/shared/CategoryFilter";
 import Collection from "@/components/shared/Collection";
+import Search from "@/components/shared/Search";
 import { getAllEvents } from "@/lib/actions/event.action";
 import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs";
@@ -17,18 +19,27 @@ export default async function AdminPage({ searchParams } : SearchParamProps){
   
     const userId = sessionClaims?.userId as string;
 
+
+    const currentPage = Number( searchParams?.page ) || 1;
+
+    const searchQuery = ( searchParams?.query as string ) || '';
+    const currentCategory = ( searchParams?.category as string ) || '';
+    
     const events = await getAllEvents({
-        query: "",
-        page: 1,
-        category: "",
+        query: searchQuery,
+        page: currentPage,
+        category: currentCategory,
         limit: 20,
         isWebsiteAdmin,
     });
 
-    const currentPage = Number( searchParams?.page ) || 1;
-    
     return (
         <section className="wrapper my-8">
+            <div className="flex w-full flex-col gap-5 md:flex-row pb-10">
+                <Search placeholder="Search title..." />
+                <CategoryFilter />
+            </div>
+        
             <Collection 
                 data={events?.data}
                 emptyTitle="No Event tickets found"
