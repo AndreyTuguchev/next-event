@@ -71,6 +71,7 @@
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 html {
@@ -81,6 +82,8 @@ html {
 body {
   font-family: var(--font-poppins)
 }
+
+
 
 .filter-grey {
   filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
