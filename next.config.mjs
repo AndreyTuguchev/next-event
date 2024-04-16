@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
+
+        domains: ['cdn.frontend-swe.best', 'frontend-swe.best'],
+      
         remotePatterns: [
           {
             protocol: 'https',
