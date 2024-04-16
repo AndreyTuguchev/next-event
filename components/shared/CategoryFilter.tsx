@@ -14,11 +14,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
+
 export default function CategoryFilter() {
 
     const router = useRouter();
     const [categories, setCategories ] = useState<ICategory[]>([]);
     const searchParams = useSearchParams();
+
     
     useEffect(() => {
         const getCategories = async () => {

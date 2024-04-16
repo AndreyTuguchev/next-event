@@ -34,7 +34,7 @@ export default async function AdminPage({ searchParams } : SearchParamProps){
     });
 
     return (
-        <section className="wrapper my-8">
+        <section className="!pt-[115px] wrapper my-8">
             <div className="flex w-full flex-col gap-5 md:flex-row pb-10">
                 <Search placeholder="Search title..." />
                 <CategoryFilter />

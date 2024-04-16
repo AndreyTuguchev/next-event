@@ -6,7 +6,6 @@ import { Button } from "../ui/button";
 import { deleteEvent } from "@/lib/actions/event.action";
 import { usePathname } from "next/navigation";
 
-
 export default function DeleteConfirmation({ eventId } : { eventId : string }){
 
     const [ deleteEventState, setDeleteEventState ] = useState(false);
@@ -23,8 +22,6 @@ export default function DeleteConfirmation({ eventId } : { eventId : string }){
         // })
 
     }, [deleteEventState])
-
-    console.log('process.env.NEXT_PUBLIC_CDN_URL ', process.env.NEXT_PUBLIC_CDN_URL)
 
     return (
         <div className={`${ !deleteEventState && 'absolute top-14 bg-white'} cursor-pointer flex flex-col right-2 overflow-hidden rounded-xl  shaodw-sm gap-4 transition-all z-[5]`}>

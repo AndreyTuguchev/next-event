@@ -11,16 +11,16 @@ export default function Header(){
     let userRole = sessionClaims?.userRole as string;
   
     return (
-        <header className="w-full border-b">
+        <header className="w-full border-b absolute top-0 bg-white z-10">
             <div className="wrapper flex items-center justify-between relative" >
                 <Link href="/" className="w-36">
                     <Image priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/images/logo.png`} width={277} height={277} className="max-w-[55px] h-auto" alt="Event App Logo" />
                 </Link>
 
-                <SignedIn>
                     <nav className="md:flex-between hidden w-full max-w-xs">
                         <NavItems websiteAdmin={"super_admin" === userRole} />
                     </nav>
+                <SignedIn>
                 </SignedIn>
 
                 <div className="flex w-32 justify-end gap-3">
