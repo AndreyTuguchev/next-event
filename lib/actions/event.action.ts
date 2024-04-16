@@ -84,7 +84,7 @@ export const getEventById = async ( eventId: string ) => {
 }
 
 
-export async function getAllEvents({ query, limit = 6, page, category, isWebsiteAdmin=false }: GetAllEventsParams) {
+export async function getAllEvents({ query, limit = 9, page, category, isWebsiteAdmin=false }: GetAllEventsParams) {
   try {
     await connectToDatabase()
 
@@ -101,7 +101,7 @@ export async function getAllEvents({ query, limit = 6, page, category, isWebsite
 
     const skipAmount = (Number(page) - 1) * limit
     const eventsQuery = Event.find(conditions)
-      .sort({ createdAt: 'desc' })
+      .sort({ startDateTime: 'asc' })
       .skip(skipAmount)
       .limit(limit)
 
@@ -253,7 +253,7 @@ export async function updateEvent({ userId, event, path, isWebsiteAdmin=false  }
   }
 
 
-  export async function getEventsByUser({ userId, limit = 6, page }: GetEventsByUserParams) {
+  export async function getEventsByUser({ userId, limit = 9, page }: GetEventsByUserParams) {
     try {
       await connectToDatabase()
   

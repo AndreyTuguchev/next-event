@@ -33,14 +33,14 @@ export default async function Home( { searchParams }: SearchParamProps) {
     query: searchQuery,
     page: currentPage,
     category: currentCategory,
-    limit: 6
+    limit: 9
   });
 
   return (
     <>
-      <section className="py-0 bg-primary-50 bg-contain md:py-10">
-        <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
-          <div className="flex flex-col justify-center gap-8">
+      <section className="pt-[130px] bg-primary-50 bg-contain md:py-10 h-[100dvh] flex items-center">
+        <div className="wrapper flex flex-col justify-center items-center h-full gap-5 md:flex-row md:h-auto ">
+          <div className="flex h-[50%] flex-col justify-center gap-8">
             <h1 className="h1-bold">Introducing Cutting-Edge Events Hosting Platorm!</h1>
             <p className="p-regular-20 md:p-regular-24">Book your tickets for latest events in your local area or anywhere in the world!</p>
             <Button asChild className="button w-full sm:w-fit" size="lg">
@@ -50,7 +50,9 @@ export default async function Home( { searchParams }: SearchParamProps) {
             </Button>
           </div>
 
-          <Image priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/images/hero.png`} width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
+          <div className="flex h-[50%]">
+            <Image priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/images/hero.png`} width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
+          </div>
         </div>
       </section>
 
