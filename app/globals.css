@@ -84,6 +84,10 @@ body {
 }
 
 
+/* [style*="background-image"]:not(.lazyloaded){
+  background-image: unset !important;
+} */
+
 
 .filter-grey {
   filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
