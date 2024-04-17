@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import NavItems from "./NavItems";
 import MobileNav from "./MobileNav";
 
+
 export default function Header(){
 
     const sessionClaims = auth().sessionClaims;
@@ -14,7 +15,7 @@ export default function Header(){
         <header className="w-full border-b absolute top-0 bg-white z-10">
             <div className="wrapper flex items-center justify-between relative" >
                 <Link href="/" className="w-36">
-                    <Image priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/images/logo.png`} width={277} height={277} className="max-w-[55px] h-auto" alt="Event App Logo" />
+                    <Image unoptimized priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/images/logo.png`} width={277} height={277} className="max-w-[55px] h-auto" alt="Event App Logo" />
                 </Link>
 
                     <nav className="md:flex-between hidden w-full max-w-xs">

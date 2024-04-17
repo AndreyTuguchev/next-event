@@ -24,8 +24,10 @@ export default function EventCard({ event, hasOrderLink, hidePrice, loggedInUser
     return (
         <div className="group flex relative min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
             <Link href={`/events/${event._id}`} className="w-full h-full">
-                <span className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500 w-full h-[40%]"
-                      style={{ backgroundImage: `url(${event.imageUrl})` }}></span>
+                <span className="!h-[40%] overflow-hidden relative inline-block w-full aspect-video ">
+                    <Image src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2026%2026%22%3E%3C/svg%3E"  data-src={event.imageUrl} fill alt='about section image'  className=" w-auto !h-auto !top-[-40%] " unoptimized />
+                </span>
+                
                 
        
                 <span className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4">
