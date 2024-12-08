@@ -2,7 +2,7 @@
 const nextConfig = {
     images: {
 
-        domains: ['cdn.frontend-swe.best', 'frontend-swe.best'],
+        domains: ['assets.frontend-swe.best', 'frontend-swe.best'],
       
         remotePatterns: [
           {
@@ -12,7 +12,7 @@ const nextConfig = {
           },
           {
             protocol: 'https',
-            hostname: 'cdn.frontend-swe.best',
+            hostname: 'assets.frontend-swe.best',
             port: ''
           },
           {

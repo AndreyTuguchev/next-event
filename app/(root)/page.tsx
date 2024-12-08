@@ -51,7 +51,7 @@ export default async function Home( { searchParams }: SearchParamProps) {
           </div>
 
           <div className="flex h-[50%]">
-            <Image priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/assets/images/hero.png`} width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
+            <Image priority src={`${process.env.NEXT_PUBLIC_CDN_URL}/images/hero.png`} width={1000} height={1000} alt="Hero image" className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]" />
           </div>
         </div>
       </section>
