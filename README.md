@@ -1,3 +1,31 @@
+
+
+
+<h1>Homepage Hero Section</h1>
+<div>
+    Once you navigate to the homepage you can press Login button which will open Clerk authentication form or you can simply 'Explore now' button which will scroll the page to the events section where you can find all types of events according to you interests    
+</div>
+
+<a href='https://next-event-andrey-tuguchev.vercel.app/' target="_blank" >
+        <img src='_files/demo/next-event-hero-section.png' />
+</a><br/><br/><br/>
+
+
+<h2>Homepage Events Section</h2>
+<div>
+You can easily search by title or by category and find the event that will start soon. <br/>
+Pagination appears only if we have more than 9 events to display according to your current search queries.
+</div>
+<a href='#' target="_blank" >
+        <img src='public/assets/images/about/homepage-events-section-v2.jpg' />
+</a><br/><br/><br/>
+
+
+
+---
+
+# Installation guide:
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -40,8 +68,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 
-=============================================================================
-
+==================================
+==================================
 
 ## Deploy on AWS EC2
 **#1 Create AWS EC2 free tier instance (I'm using Ubuntu 22.04 LTS).**\
