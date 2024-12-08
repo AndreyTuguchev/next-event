@@ -5,7 +5,7 @@
 <div>
     Once you navigate to the homepage you can press Login button which will open Clerk authentication form or you can simply 'Explore now' button which will scroll the page to the events section where you can find all types of events according to you interests    
 </div>
-
+<br/>
 <a href='https://next-event-andrey-tuguchev.vercel.app/' target="_blank" >
         <img src='_files/demo/next-event-hero-section.png' />
 </a><br/><br/><br/>
@@ -16,9 +16,125 @@
 You can easily search by title or by category and find the event that will start soon. <br/>
 Pagination appears only if we have more than 9 events to display according to your current search queries.
 </div>
+<br/>
 <a href='#' target="_blank" >
         <img src='public/assets/images/about/homepage-events-section-v2.jpg' />
 </a><br/><br/><br/>
+
+
+<h2>Homepage Search</h2>
+<div>
+You can easily search for any text in the event's title or search by category
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img src='public/assets/images/about/homepage-searching.jpg' />
+</a><br/><br/><br/>
+
+
+
+<h2>Pagination</h2>
+<div>
+Pagination will be rendered if we have more than 9 events to display according to your current search request.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/homepage-pagination-v2.jpg' />
+</a><br/><br/><br/>
+
+
+
+<h2>Event Page Hero Section</h2>
+<div>
+Once you navigate to an existing event you can see all the information about this event in it's Hero section. <br/>
+By pressing the 'Get Tickets' button you will be redirected to the Stripe payment form where you can use <br/>the test credit card number
+<code>4242 4242 4242 4242</code> and any expiration date and CVV in order to finalize your purchase.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/event-page-hero.jpg' />
+</a><br/><br/><br/>
+
+
+<h2>Related Events</h2>
+<div>
+If we have any other events from the same category they will be listed below the related events section for currently opened event.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/event-page-related-events.jpg' />
+</a><br/><br/><br/>
+
+
+
+<h2>Sign-In Form</h2>
+<div>
+Once you click 'Login' or 'Get Tickets' button you'll be redirected to the sign-in page where you can find Clerk based authentication. You can use Google, Facebook, LinkedIn or even GitHub accounts to sign-in or sign-up via Clerk.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/sign-in-form.jpg' />
+</a><br/><br/><br/>
+
+
+<h2>Stripe Payment Form</h2>
+<div>
+Once you've pressed 'Get Tickets' button you'll be redirected to the Stripe payment form where you can enter test credit card details to complete this purchase.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/stripe-payment-form--v2.jpg' />
+</a><br/><br/><br/>
+
+
+
+<h2>Profile My Tickets</h2>
+<div>
+If you've purchased any ticket in the past those tickets will be listed at your profile's page.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/profile-my-tickets.jpg' />
+</a><br/><br/><br/>
+
+
+
+<h2>Profile Organized Events</h2>
+<div>
+If you've organized any event in the past those events will be listed at your profile's page.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/profile-orginized-events.jpg' />
+</a><br/><br/><br/>
+
+
+
+<h2>New Event Status</h2>
+<div>
+Every new event has 'Pending Approval' status by default and only the website's admin can approve the event. Each user can only have 2 pending events at any point in time and the user can create up to 25 events. Create form will not be rendered if the user already has 2 pending events or reached 25 events created in total. This can help us to reduce the amount of spam.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/new-event-pending-status.jpg' />
+</a><br/><br/><br/>
+
+
+
+<h2>Event Delete Action</h2>
+<div>
+Once you navigate to your profile page you can edit or delete your events by pressing specified buttons. Edit button will navigate you to the event edit form but the delete button will render the confirmation where you can make a final decision about this event.
+</div>
+<br/>
+<a href='#' target="_blank" >
+        <img width='550' height='auto' src='public/assets/images/about/event-deletion-example.jpg' />
+</a><br/><br/><br/>
+
+
+
+
+
+
 
 
 
