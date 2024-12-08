@@ -6,6 +6,7 @@ import Link from "next/link";
 import { imageLazyLoadObserver } from "@/lib/footerScripts.js";
 import { useEffect } from 'react';
 import { useParams } from "next/navigation";
+import FooterAnalyticsScripts from "./FooterAnalyticsScripts";
 
 
 const imageLazyLoadObserverFn = imageLazyLoadObserver();
@@ -27,7 +28,7 @@ export default function Footer(){
     }, [searchParams])
 
     return (
-
+        <>
         <footer className="border-t">
             <div className="flex-center wrapper flex-between flex flex-col gap-4 p-5 text-center sm:flex-row">
                 <Link href="/">
@@ -39,6 +40,7 @@ export default function Footer(){
                 <p>2024 Events App. All Rights Reserved.</p>
             </div>
         </footer>
-        
+        <FooterAnalyticsScripts />
+        </>
     )
 }
