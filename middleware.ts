@@ -4,6 +4,9 @@ export default authMiddleware({
   publicRoutes: [
     '/', 
     '/about',
+    '/assets(.*)',
+    '/images(.*)',
+    '/favicon.ico',
     '/events/:id', 
     '/api/webhook/clerk',
     '/api/webhook/stripe',
@@ -11,6 +14,9 @@ export default authMiddleware({
   ],
   
     ignoredRoutes: [ 
+      '/assets(.*)',
+      '/images(.*)',
+      '/favicon.ico',
       '/api/webhook/clerk',
       '/api/webhook/stripe',
       '/api/uploadthing',

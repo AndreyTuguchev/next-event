@@ -12,7 +12,7 @@ export default function MobileNav({ websiteAdmin } : { websiteAdmin : boolean })
                     <MobileNavToggle />
                 </SheetTrigger>
                 <SheetContent className="bg-white flex flex-col gap-6 md:hidden items-center">
-                    <Image src={`${process.env.NEXT_PUBLIC_CDN_URL}/images/logo.png`} width={105} height={105} alt="Event App Logo" className="mb-2"  />
+                    <Image src={`/assets/images/logo.png`} width={105} height={105} alt="Event App Logo" className="mb-2"  />
                     <span className="border border-b-1 border-gray-50" ></span>
                     <NavItems websiteAdmin={websiteAdmin} />
                 </SheetContent>
