@@ -320,7 +320,7 @@ Notice that we’ve updated the root configuration to our new directory, and the
 
 **#18 Install PM2 (the process manager for Node.js applications).**\
 PM2 basically manages applications (run them in the background as a service). 
-So this is how we install PM2 globally:
+So this is how we install PM2 globally:\
 `npm install -g pm2`
 
 **#19 navigate your terminal to your current project directory:**\
