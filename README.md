@@ -302,7 +302,7 @@ Notice that we’ve updated the root configuration to our new directory, and the
 
 **#16 Install latest version of Node.js**\
 [Commands from "Install Node.js documentation"](https://nodejs.org/en/download/package-manager)\
-`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash`
+`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash`
 
 `source ~/.bashrc`
 
