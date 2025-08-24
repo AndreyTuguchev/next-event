@@ -218,15 +218,11 @@ sudo apt install nginx
 
 **NOTE: replace your_domain with your actual domain name.**
 
-**#5.0 Create directory for *your_domain* (replace it with your real domain name) as follows:**
+**#5 Create directory for *your_domain* (replace it with your real domain name) as follows:**
 ```bash
 sudo mkdir -p /var/www/your_domain/html
 ```
 
-**#5.1 change permissions for this directory recursively**
-```bash
-sudo chmod -R 755 /var/www/your_domain
-```
 
 **#6 Next, assign ownership of the directory with the `$USER` environment variable:**
 ```bash
