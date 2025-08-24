@@ -423,8 +423,27 @@ apps : [{
 pm2 start
 ```
 
+**#25 run command to save process list so pm2:**
+```bash
+pm2 save
+```
 
-**#25 OPTIONAL. IF you don't want to use config file then you can simply start your application using pm2 on port 3000**
+**#26 now you need to add pm2 to startup on system reboot - run ternimal command from below to get the final command which you will need to execute from sudo:**
+```bash
+pm2 startup systemd
+```
+
+**#27 copy the terminal output after the previous command execution and run that. The coomand will look similar to this:**
+```bash
+sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u your_username --hp /home/your_username
+```
+
+**#28 now you need to save the process list again (important):**
+```bash
+pm2 save
+```
+
+**#OPTIONAL. IF you don't want to use config file then you can simply start your application using pm2 on port 3000**
 ```bash
 pm2 start "npm run start -- -p 3000" --name YOU_APP_NAME
 ```
