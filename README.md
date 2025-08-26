@@ -240,52 +240,74 @@ Instead of modifying the default configuration file directly, let’s make a new
 sudo nano /etc/nginx/sites-available/your_domain
 ```
 
-**#9 Paste in the following configuration block, which is similar to the default, but updated for our new directory and domain name:**
+**#9 Copy this Nginx config example, replace CURRENT_DOMAIN_NAME with the actual domain name for your website and paste the following configuration block into the terminal where nano text editor is opened from the previous command:**
 ```bash
 server {
-        listen 80;
-        listen [::]:80;
 
-        root /var/www/your_domain/html;
-        index index.html index.htm index.nginx-debian.html;
+    # listen on *:443 -> ssl; instead of *:80
 
-        server_name your_domain www.your_domain;
+    server_name CURRENT_DOMAIN_NAME.com www.CURRENT_DOMAIN_NAME.com;
 
-        return 301 https://$server_name$request_uri;
+    gzip on;
+    gzip_proxied any;
+    gzip_types text/plain text/css text/javascript application/javascript application/x-javascript application/json application/xml application/rss+xml application/atom+xml font/ttf font/otf image/svg+xml;
+    gzip_comp_level 5;
+    gzip_buffers 16 8k;
+    gzip_min_length 256;
+    gzip_vary on;
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "geolocation=(), microphone=()" always;
+
+    set $root /var/www/CURRENT_DOMAIN_NAME.com/html;
+    set $build $root/.next;
+
+    location @public {
+        root $root/public;
+        try_files $uri @proxy;
+    }
+
+    location / {
+        root $build;
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /_next/static {
+        alias $build/static;
+        expires 1y;
+        access_log off;
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ /.well-known {
+        allow all;
+    }
 }
 
+
 server {
-     listen 443;
-     listen [::]:443;
+    if ($host = CURRENT_DOMAIN_NAME.com) {
+      return 301 https://$host$request_uri;
+    } # managed by Certbot
 
-     server_name your_domain www.your_domain;
 
-     root /var/www/your_domain/html;
+    listen [::]:80;
+    listen 80;
 
-     #ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-     #ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-     #include snippets/ssl-params.conf;
-
-     location / {
-          # reverse proxy for next server
-          proxy_pass http://localhost:3000;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection 'upgrade';
-          proxy_set_header Host $host;
-          proxy_cache_bypass $http_upgrade;
-
-          # we need to remove this 404 handling
-          # because next's _next folder and own handling
-          # try_files $uri $uri/ =404;
-     }
-
-     location ~ /.well-known {
-          allow all;
-     }
+    server_name CURRENT_DOMAIN_NAME.com www.CURRENT_DOMAIN_NAME.com;
+    return 404; # managed by Certbot
 }
 ```
 Notice that we’ve updated the root configuration to our new directory, and the server_name to our domain name.
+Note that the website will not work right now because you need to install Certbot SSL certicifate before your website will be accessible in the browser.
 
 
 **#10 Now, let’s enable the file by creating a link from it to the sites-enabled directory, which Nginx reads from during startup:**
