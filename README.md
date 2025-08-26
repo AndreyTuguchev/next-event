@@ -240,13 +240,13 @@ Instead of modifying the default configuration file directly, let’s make a new
 sudo nano /etc/nginx/sites-available/your_domain
 ```
 
-**#9 Copy this Nginx config example, replace CURRENT_DOMAIN_NAME with the actual domain name for your website and paste the following configuration block into the terminal where nano text editor is opened from the previous command:**
+**#9 Copy this Nginx config example, replace YOUR_DOMAIN with the actual domain name for your website and paste the following configuration block into the terminal where nano text editor is opened from the previous command:**
 ```bash
 server {
 
     # listen on *:443 -> ssl; instead of *:80
 
-    server_name CURRENT_DOMAIN_NAME.com www.CURRENT_DOMAIN_NAME.com;
+    server_name YOUR_DOMAIN.com www.YOUR_DOMAIN.com;
 
     gzip on;
     gzip_proxied any;
@@ -262,7 +262,7 @@ server {
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
     add_header Permissions-Policy "geolocation=(), microphone=()" always;
 
-    set $root /var/www/CURRENT_DOMAIN_NAME.com/html;
+    set $root /var/www/YOUR_DOMAIN.com/html;
     set $build $root/.next;
 
     location @public {
@@ -294,7 +294,7 @@ server {
 
 
 server {
-    if ($host = CURRENT_DOMAIN_NAME.com) {
+    if ($host = YOUR_DOMAIN.com) {
       return 301 https://$host$request_uri;
     } # managed by Certbot
 
@@ -302,7 +302,7 @@ server {
     listen [::]:80;
     listen 80;
 
-    server_name CURRENT_DOMAIN_NAME.com www.CURRENT_DOMAIN_NAME.com;
+    server_name YOUR_DOMAIN.com www.YOUR_DOMAIN.com;
     return 404; # managed by Certbot
 }
 ```
