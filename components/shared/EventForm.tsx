@@ -69,9 +69,6 @@ export default function EventForm({
   const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
-    // console.log('form submitted')
-    // console.log('files =', files);
-
     let uploadedImageUrl = values.imageUrl;
 
     if (files.length > 0) {
@@ -116,7 +113,7 @@ export default function EventForm({
           router.push(`/events/${newEvent._id}`);
         }
       } catch (error) {
-        //   console.log(error);
+        console.error(error);
       }
     }
 
@@ -139,12 +136,9 @@ export default function EventForm({
           router.push(`/events/${updatedEvent._id}`);
         }
       } catch (error) {
-        //   console.log(error);
+        console.error(error);
       }
     }
-
-    // console.log(values)
-    // console.log(values.imageUrl)
   }
 
   return (
