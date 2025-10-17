@@ -5,7 +5,7 @@ import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Checkout from "@/components/shared/Checkout";
+import Checkout from "@/components/ui/checkout";
 
 const CheckoutButton = ({ event }: { event: IEvent }) => {
   const { user } = useUser();
