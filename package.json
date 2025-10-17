@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "typecheck": "tsc -p ./tsconfig.json",
     "start": "next start",
     "lint": "next lint"
   },
@@ -41,15 +42,24 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18",
+    "@typescript-eslint/parser": "^8.46.1",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
+    "eslint": "^8.57.1",
     "eslint-config-next": "14.1.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-next": "^0.0.0",
+    "husky": "^9.1.7",
     "postcss": "^8",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^8.46.1"
   }
 }
