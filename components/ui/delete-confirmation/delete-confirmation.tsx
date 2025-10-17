@@ -4,7 +4,7 @@ import Image from "next/image";
 import { startTransition, useEffect, useState } from "react";
 import { deleteEvent } from "@/lib/actions/event.action";
 import { usePathname } from "next/navigation";
-import { Button } from "../button";
+import { Button } from "@/components/ui/button";
 
 const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
   const [deleteEventState, setDeleteEventState] = useState(false);

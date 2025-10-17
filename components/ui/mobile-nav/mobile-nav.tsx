@@ -1,8 +1,8 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 import Image from "next/image";
-import NavItems from "../nav-items";
-import MobileNavToggle from "../mobile-nav-toggle";
+import NavItems from "@/components/ui/nav-items";
+import MobileNavToggle from "@/components/ui/mobile-nav-toggle";
 
 const MobileNav = ({ websiteAdmin }: { websiteAdmin: boolean }) => {
   return (

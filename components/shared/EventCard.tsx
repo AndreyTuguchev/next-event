@@ -2,7 +2,7 @@ import { IEvent } from "@/lib/database/models/event.model";
 import { formatDateTime } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import DeleteConfirmation from "../ui/delete-confirmation";
+import DeleteConfirmation from "@/components/ui/delete-confirmation";
 
 type EventCardProps = {
   event: IEvent;
