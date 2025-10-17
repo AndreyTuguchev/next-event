@@ -1,24 +1,16 @@
-import { IEvent } from "@/lib/database/models/event.model";
 import { formatDateTime } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import DeleteConfirmation from "@/components/ui/delete-confirmation";
+import { EventCardProps } from "./event-card.types";
 
-type EventCardProps = {
-  event: IEvent;
-  hasOrderLink?: boolean;
-  hidePrice: boolean;
-  loggedInUserId: string;
-  isWebsiteAdmin?: boolean;
-};
-
-export default function EventCard({
+const EventCard = ({
   event,
   hasOrderLink,
   hidePrice,
   loggedInUserId,
   isWebsiteAdmin,
-}: EventCardProps) {
+}: EventCardProps) => {
   const eventStartData = formatDateTime(event.startDateTime);
 
   const isEventCreator =
@@ -106,4 +98,6 @@ export default function EventCard({
       )}
     </div>
   );
-}
+};
+
+export default EventCard;
