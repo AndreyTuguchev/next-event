@@ -1,6 +1,6 @@
 import { IEvent } from "@/lib/database/models/event.model";
-import Pagination from "./Pagination";
 import EventCard from "@/components/ui/event-card";
+import Pagination from "@/components/ui/pagination";
 
 type CollectionProps = {
   data: IEvent[];
