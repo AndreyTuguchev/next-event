@@ -1,4 +1,3 @@
-import Collection from "@/components/shared/Collection";
 import { Button } from "@/components/ui/button";
 import { getAllEvents } from "@/lib/actions/event.action";
 import Image from "next/image";
@@ -7,6 +6,7 @@ import { auth } from "@clerk/nextjs";
 import { SearchParamProps } from "@/types";
 import CategoryFilter from "@/components/ui/category-filter";
 import Search from "@/components/ui/search";
+import Collection from "@/components/ui/collection";
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const sessionClaims = auth().sessionClaims;

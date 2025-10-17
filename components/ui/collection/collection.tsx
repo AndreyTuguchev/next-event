@@ -1,20 +1,8 @@
-import { IEvent } from "@/lib/database/models/event.model";
 import EventCard from "@/components/ui/event-card";
+import { CollectionProps } from "./collection.types";
 import Pagination from "@/components/ui/pagination";
 
-type CollectionProps = {
-  data: IEvent[];
-  emptyTitle: string;
-  emptyStateSubtext: string;
-  collectionType?: "Events_Organized" | "My_Tickets" | "All_Events";
-  page: number | string;
-  totalPages?: number;
-  urlParamName?: string;
-  loggedInUserId: string;
-  isWebsiteAdmin?: boolean;
-};
-
-export default function Collection({
+const Collection = ({
   data,
   emptyTitle,
   emptyStateSubtext,
@@ -24,7 +12,7 @@ export default function Collection({
   urlParamName,
   loggedInUserId,
   isWebsiteAdmin,
-}: CollectionProps) {
+}: CollectionProps) => {
   return (
     <>
       {null != data[0] && data.length > 0 ? (
@@ -66,4 +54,6 @@ export default function Collection({
       )}
     </>
   );
-}
+};
+
+export default Collection;

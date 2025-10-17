@@ -1,4 +1,4 @@
-import Collection from "@/components/shared/Collection";
+import Collection from "@/components/ui/collection";
 import CheckoutButton from "@/components/ui/checkout-button";
 import {
   getEventById,

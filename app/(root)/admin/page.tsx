@@ -1,4 +1,4 @@
-import Collection from "@/components/shared/Collection";
+import Collection from "@/components/ui/collection";
 import CategoryFilter from "@/components/ui/category-filter";
 import Search from "@/components/ui/search";
 import { getAllEvents } from "@/lib/actions/event.action";
