@@ -6,7 +6,7 @@ import Link from "next/link";
 import { imageLazyLoadObserver } from "@/lib/footerScripts.js";
 import { useEffect } from "react";
 import { useParams } from "next/navigation";
-import FooterAnalyticsScripts from "@/components/shared/FooterAnalyticsScripts";
+import AllAnalyticsScripts from "@/lib/analytics/all-analytics-scripts";
 
 const imageLazyLoadObserverFn = imageLazyLoadObserver();
 
@@ -41,7 +41,8 @@ const Footer = () => {
           <p>2024 Events App. All Rights Reserved.</p>
         </div>
       </footer>
-      <FooterAnalyticsScripts />
+
+      <AllAnalyticsScripts />
     </>
   );
 };
