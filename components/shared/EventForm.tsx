@@ -6,10 +6,8 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -18,18 +16,19 @@ import * as z from "zod";
 import { eventDefaultValues } from "@/constants";
 // import Dropdown from "./Dropdown"
 import { Textarea } from "@/components/ui/textarea";
-import FileUploader from "./FileUploader";
+
 import { useState } from "react";
 import Image from "next/image";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Checkbox } from "../ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import { createEvent, updateEvent } from "@/lib/actions/event.action";
 import { IEvent } from "@/lib/database/models/event.model";
 import { Switch } from "@/components/ui/switch";
-import Dropdown from "../ui/dropdown";
+import Dropdown from "@/components/ui/dropdown";
+import FileUploader from "@/components/ui/file-uploader";
 
 type EventFormProps = {
   userRole: string;
