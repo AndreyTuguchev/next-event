@@ -1,16 +1,12 @@
 /// <reference types="vitest" />
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   test: {
     globals: true, // allows using `describe`, `it`, `expect` without imports
-
-    setupFiles: "./vitest.setup.ts", // optional
-    include: ["**/__tests__/**/*.{test,spec}.{js,ts,jsx,tsx}"],
-    exclude: ["node_modules", ".next", "dist"],
-    css: true,
 
     // Enables browser mode
     browser: {
