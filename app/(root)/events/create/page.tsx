@@ -1,5 +1,4 @@
-import EventForm from "@/components/shared/EventForm";
-
+import EventForm from "@/components/forms/event-form";
 import { isValidUserAction } from "@/lib/actions/user.actions";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
