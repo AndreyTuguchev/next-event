@@ -7,7 +7,9 @@
     "build": "next build",
     "prepare": "husky install .husky && npm run husky:init",
     "husky:init": "node scripts/setup-husky.js",
-    "precommit": "npm-run-all -p lint typecheck",
+    "precommit": "npm-run-all -s prettier:fix -p lint typecheck",
+    "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
     "typecheck": "tsc -p ./tsconfig.json",
     "start": "next start",
     "lint": "next lint"
@@ -48,11 +50,14 @@
   "devDependencies": {
     "@eslint/js": "^9.38.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@tailwindcss/vite": "^4.1.16",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18",
     "@typescript-eslint/parser": "^8.46.1",
+    "@vitejs/plugin-react": "^5.1.0",
+    "@vitest/browser": "^4.0.3",
     "autoprefixer": "^10.0.1",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.1.4",
@@ -64,7 +69,9 @@
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5",
-    "typescript-eslint": "^8.46.1"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.1",
+    "vitest": "^4.0.3",
+    "vitest-browser-react": "^2.0.0"
   }
 }
