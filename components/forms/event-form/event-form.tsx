@@ -102,7 +102,7 @@ const EventForm = ({
       form,
       toast,
       router,
-    ]
+    ],
   );
 
   const isSubmitting = form.formState.isSubmitting || isUploading;

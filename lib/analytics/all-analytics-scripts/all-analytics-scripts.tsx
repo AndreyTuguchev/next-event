@@ -26,7 +26,7 @@ const AllAnalyticsScripts = () => {
         () => {
           !loadGoogleScriptsState && setLoadGoogleScriptsState(true);
         },
-        { once: true }
+        { once: true },
       );
 
       window.addEventListener(
@@ -34,7 +34,7 @@ const AllAnalyticsScripts = () => {
         () => {
           !loadGoogleScriptsState && setLoadGoogleScriptsState(true);
         },
-        { once: true }
+        { once: true },
       );
 
       window.addEventListener(
@@ -42,7 +42,7 @@ const AllAnalyticsScripts = () => {
         () => {
           !loadGoogleScriptsState && setLoadGoogleScriptsState(true);
         },
-        { once: true }
+        { once: true },
       );
     }
 

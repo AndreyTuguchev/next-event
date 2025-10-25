@@ -6,7 +6,7 @@ import { EventFormValues } from "../../event-form.types";
  */
 const normalizeEventData = (
   values: EventFormValues,
-  imageUrl: string
+  imageUrl: string,
 ): EventFormValues => {
   const normalized = { ...values, imageUrl };
 

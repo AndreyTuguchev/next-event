@@ -7,7 +7,7 @@ export function useFileUpload() {
 
   const uploadFiles = async (
     filesToUpload: File[],
-    fallbackUrl: string
+    fallbackUrl: string,
   ): Promise<string> => {
     if (filesToUpload.length === 0) {
       return fallbackUrl;

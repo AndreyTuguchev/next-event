@@ -187,7 +187,7 @@ export const deleteEvent = async ({ eventId, path }: DeleteEventParams) => {
           deletedEvent.organizer.listOfEventsCreatedTime =
             deletedEvent.organizer.listOfEventsCreatedTime.substr(
               0,
-              deletedEvent.organizer.listOfEventsCreatedTime.length - 1
+              deletedEvent.organizer.listOfEventsCreatedTime.length - 1,
             );
         }
       }
@@ -213,7 +213,7 @@ export const approveEventById = async ({ event }: ApproveEventParams) => {
     const updatedEvent = await Event.findByIdAndUpdate(
       event._id,
       { ...event, isApproved: true },
-      { new: false }
+      { new: false },
     );
 
     if (!updatedEvent) {
@@ -251,7 +251,7 @@ export async function updateEvent({
     const updatedEvent = await Event.findByIdAndUpdate(
       event._id,
       { ...event, category: event.categoryId },
-      { new: true }
+      { new: true },
     );
     revalidatePath(path);
 
