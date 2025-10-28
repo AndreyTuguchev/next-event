@@ -13,7 +13,8 @@
     "typecheck": "tsc -p ./tsconfig.json",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "test:browser": "vitest --browser --browser.name=chromium --browser.headless=false --browser.ui"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.31.6",
