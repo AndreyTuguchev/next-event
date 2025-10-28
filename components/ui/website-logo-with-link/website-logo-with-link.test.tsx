@@ -3,7 +3,7 @@ import { page } from "vitest/browser";
 import WebsiteLogoWithLink from "./website-logo-with-link";
 
 describe("Website Logo with link", () => {
-  it("should render website logo with the homepage link", async () => {
+  it("should render website logo image with the homepage link", async () => {
     render(<WebsiteLogoWithLink />);
 
     const link = page.getByRole("link");
@@ -21,7 +21,7 @@ describe("Website Logo with link", () => {
       .toHaveAttribute("src", expect.stringContaining("/assets/images/"));
   });
 
-  it("renders placeholder SVG when lazyload=true", async () => {
+  it("should render placeholder SVG when lazyload=true", async () => {
     render(<WebsiteLogoWithLink lazyload />);
 
     const image = page.getByRole("img", { name: /logo/i });
