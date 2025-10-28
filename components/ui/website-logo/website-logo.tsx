@@ -9,7 +9,7 @@ const WebsiteLogo = ({ lazyload = false }: { lazyload?: boolean }) => {
       data-src={`/assets/images/logo.png`}
       width={277}
       height={277}
-      className="max-w-[55px] h-auto"
+      className="max-w-14 h-auto"
       alt="Event App Logo"
     />
   );

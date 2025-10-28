@@ -3,7 +3,7 @@ import WebsiteLogo from "../website-logo";
 
 const WebsiteLogoWithLink = ({ lazyload = false }: { lazyload?: boolean }) => {
   return (
-    <Link href="/" className="w-36">
+    <Link href="/">
       <WebsiteLogo lazyload={lazyload} />
     </Link>
   );
