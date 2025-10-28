@@ -17,7 +17,7 @@ const EventCard = ({
     isWebsiteAdmin || event.organizer?._id.toString() === loggedInUserId;
 
   return (
-    <div className="group flex relative min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
+    <div className="group flex relative w-full flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg ">
       <Link href={`/events/${event._id}`} className="w-full h-full">
         <span className="!h-[40%] overflow-hidden relative inline-block w-full aspect-video ">
           <Image
@@ -25,12 +25,12 @@ const EventCard = ({
             data-src={event.imageUrl}
             fill
             alt="about section image"
-            className=" w-auto !h-auto !top-[-40%] "
+            className="w-auto !h-auto !top-[-40%] "
             unoptimized
           />
         </span>
 
-        <span className="flex min-h-[230px] flex-col gap-3 p-5 md:gap-4">
+        <span className="flex min-h-58 flex-col gap-3 p-5 md:gap-4">
           {!hidePrice && (
             <span className="flex gap-2 items-center">
               <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 text-green-60 py-1">
@@ -73,7 +73,7 @@ const EventCard = ({
 
       {!event.isApproved && (
         <>
-          <div className="absolute w-full h-full bg-[#ddd] opacity-[0.7] "></div>
+          <div className="absolute w-full h-full bg-zinc-400 opacity-70"></div>
           <div className="absolute flex flex-col left-2 top-2 rounded-xl bg-white shaodw-sm gap-4 transition-all">
             <span className="p-3">Pending Approval</span>
           </div>

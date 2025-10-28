@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDropzone } from "@uploadthing/react";
 import { generateClientDropzoneAccept } from "uploadthing/client";
-import { convertFileToUrl } from "@/lib/utils";
+import { cn, convertFileToUrl } from "@/lib/utils";
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ const FileUploader = ({
       setFiles(acceptedFiles);
       onFieldChange(convertFileToUrl(acceptedFiles[0]));
     },
-    [onFieldChange, setFiles],
+    [onFieldChange, setFiles]
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -31,7 +31,10 @@ const FileUploader = ({
     <div className="relative">
       <div
         {...getRootProps()}
-        className={` h-full items-center rounded-2xl overflow-hidden  ${!imageUrl ? "w-full" : "w-auto"} `}
+        className={cn(
+          "h-full items-center rounded-2xl overflow-hidden",
+          !imageUrl ? "w-full" : "w-auto"
+        )}
       >
         <input {...getInputProps()} className="w-full" />
 

@@ -1,30 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { startTransition, useEffect, useState } from "react";
+import { startTransition, useState } from "react";
 import { deleteEvent } from "@/lib/actions/event.action";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
   const [deleteEventState, setDeleteEventState] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    if (true === deleteEventState) {
-    }
-
-    // return ( () => {
-    //     setDeleteEventState(false);
-    // })
-  }, [deleteEventState]);
-
   return (
     <div
-      className={`${!deleteEventState && "absolute top-14 bg-white"} cursor-pointer flex flex-col right-2 overflow-hidden rounded-xl  shaodw-sm gap-4 transition-all z-[5]`}
+      className={cn(
+        "cursor-pointer flex flex-col right-2 overflow-hidden rounded-xl  shaodw-sm gap-4 transition-all z-10",
+        !deleteEventState && "absolute top-14 bg-white"
+      )}
     >
       <span
-        className={` ${deleteEventState ? `!hidden` : ""} p-3`}
+        className={cn("p-3", deleteEventState && `!hidden`)}
         onClick={() => {
           setDeleteEventState(true);
         }}
@@ -39,12 +34,12 @@ const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
 
       {deleteEventState && (
         <>
-          <span className="absolute backdrop-blur w-[110%] h-[110%] left-0 top-0 bg-[#00000092] flex items-center p-10 text-center z-[7]"></span>
-          <span className="text-white absolute w-full h-full left-0 top-0 flex flex-col items-center justify-center p-10 text-center z-[8]">
+          <span className="absolute backdrop-blur w-full h-full left-0 top-0 bg-[#00000092] flex items-center p-10 text-center z-10"></span>
+          <span className="text-white absolute w-full h-full left-0 top-0 flex flex-col items-center justify-center p-10 text-center z-20">
             <div className="w-full">
               Are You Sure You Want To Delete This Event?
             </div>
-            <div className="w-full flex justify-evenly mt-[20px]">
+            <div className="w-full flex justify-evenly mt-5">
               <Button
                 variant="destructive"
                 onClick={() =>

@@ -38,7 +38,7 @@ const Search = ({ placeholder }: { placeholder?: string }) => {
   }, [query, searchParams, router]);
 
   return (
-    <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+    <div className="flex-center min-h-14 w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
       <Image
         src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2026%2026%22%3E%3C/svg%3E"
         data-src={`/assets/icons/search.svg`}
