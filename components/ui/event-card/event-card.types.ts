@@ -1,4 +1,4 @@
-import { IEvent } from "@/lib/database/models/event.model";
+import { IEvent } from '@/lib/database/models/event.model';
 
 export type EventCardProps = {
   event: IEvent;

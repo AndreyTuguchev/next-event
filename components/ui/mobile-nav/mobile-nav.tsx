@@ -1,19 +1,18 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
-import NavItems from "@/components/ui/nav-items";
-import MobileNavToggle from "@/components/ui/mobile-nav-toggle";
-import WebsiteLogo from "@/components/ui/website-logo";
+import MobileNavToggle from '@/components/ui/mobile-nav-toggle';
+import NavItems from '@/components/ui/nav-items';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import WebsiteLogo from '@/components/ui/website-logo';
 
 const MobileNav = ({ websiteAdmin }: { websiteAdmin: boolean }) => {
   return (
-    <nav className="md:hidden">
+    <nav className='md:hidden'>
       <Sheet>
-        <SheetTrigger className="align-middle">
+        <SheetTrigger className='align-middle'>
           <MobileNavToggle />
         </SheetTrigger>
-        <SheetContent className="bg-white flex flex-col gap-6 md:hidden items-center">
+        <SheetContent className='flex flex-col items-center gap-6 bg-white md:hidden'>
           <WebsiteLogo />
-          <span className="border border-b-1 border-gray-50"></span>
+          <span className='border-b-1 border border-gray-50'></span>
           <NavItems websiteAdmin={websiteAdmin} />
         </SheetContent>
       </Sheet>

@@ -1,3 +1,3 @@
-import DeleteConfirmation from "./delete-confirmation";
+import DeleteConfirmation from './delete-confirmation';
 
 export default DeleteConfirmation;

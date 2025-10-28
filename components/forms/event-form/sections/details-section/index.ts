@@ -1,3 +1,3 @@
-import DetailsSection from "./details-section";
+import DetailsSection from './details-section';
 
 export default DetailsSection;

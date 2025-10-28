@@ -1,3 +1,3 @@
-import PricingSection from "./pricing-section";
+import PricingSection from './pricing-section';
 
 export default PricingSection;

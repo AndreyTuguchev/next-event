@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const gitRoot = path.resolve(__dirname, "../");
-const huskyDir = path.join(gitRoot, ".husky");
-const hookPath = path.join(huskyDir, "pre-commit");
+const gitRoot = path.resolve(__dirname, '../');
+const huskyDir = path.join(gitRoot, '.husky');
+const hookPath = path.join(huskyDir, 'pre-commit');
 
 // Ensure that .husky directory exists
 if (!fs.existsSync(huskyDir)) {
@@ -16,6 +16,6 @@ const hookContent = `#!/bin/sh
 
 npm run precommit`;
 
-fs.writeFileSync(hookPath, hookContent, { encoding: "utf8" });
+fs.writeFileSync(hookPath, hookContent, { encoding: 'utf8' });
 
-console.log("✅ Husky pre-commit hook created successfully.");
+console.log('✅ Husky pre-commit hook created successfully.');

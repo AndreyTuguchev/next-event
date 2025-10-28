@@ -1,13 +1,15 @@
-import Image from "next/image";
+import Image from 'next/image';
+
+import type { Control } from 'react-hook-form';
 import {
+  FormControl,
   FormField,
   FormItem,
-  FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import type { Control } from "react-hook-form";
-import { EventFormValues } from "../../event-form.types";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+import { EventFormValues } from '../../event-form.types';
 
 interface LocationSectionProps {
   control: Control<EventFormValues>;
@@ -15,26 +17,26 @@ interface LocationSectionProps {
 
 const LocationSection = ({ control }: LocationSectionProps) => {
   return (
-    <div className="flex flex-col gap-5 md:flex-row">
+    <div className='flex flex-col gap-5 md:flex-row'>
       <FormField
         control={control}
-        name="location"
+        name='location'
         render={({ field }) => (
-          <FormItem className="w-full">
+          <FormItem className='w-full'>
             <FormControl>
-              <div className="flex items-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+              <div className='flex h-[54px] w-full items-center overflow-hidden rounded-full bg-grey-50 px-4 py-2'>
                 <Image
                   width={24}
                   height={24}
-                  src="/assets/icons/location-grey.svg"
-                  alt=""
-                  aria-hidden="true"
+                  src='/assets/icons/location-grey.svg'
+                  alt=''
+                  aria-hidden='true'
                 />
                 <Input
-                  placeholder="Event Location or Online"
+                  placeholder='Event Location or Online'
                   {...field}
-                  className="input-field"
-                  aria-label="Event location"
+                  className='input-field'
+                  aria-label='Event location'
                 />
               </div>
             </FormControl>

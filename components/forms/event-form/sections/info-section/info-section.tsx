@@ -1,13 +1,14 @@
+import type { Control } from 'react-hook-form';
+import Dropdown from '@/components/ui/dropdown';
 import {
+  FormControl,
   FormField,
   FormItem,
-  FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import Dropdown from "@/components/ui/dropdown";
-import type { Control } from "react-hook-form";
-import { EventFormValues } from "../../event-form.types";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+import { EventFormValues } from '../../event-form.types';
 
 interface BasicInfoSectionProps {
   control: Control<EventFormValues>;
@@ -16,18 +17,18 @@ interface BasicInfoSectionProps {
 
 const BasicInfoSection = ({ control, userRole }: BasicInfoSectionProps) => {
   return (
-    <div className="flex flex-col gap-5 md:flex-row">
+    <div className='flex flex-col gap-5 md:flex-row'>
       <FormField
         control={control}
-        name="title"
+        name='title'
         render={({ field }) => (
-          <FormItem className="w-full">
+          <FormItem className='w-full'>
             <FormControl>
               <Input
-                placeholder="Event Title"
+                placeholder='Event Title'
                 {...field}
-                className="input-field"
-                aria-label="Event title"
+                className='input-field'
+                aria-label='Event title'
                 required
               />
             </FormControl>
@@ -38,9 +39,9 @@ const BasicInfoSection = ({ control, userRole }: BasicInfoSectionProps) => {
 
       <FormField
         control={control}
-        name="categoryId"
+        name='categoryId'
         render={({ field }) => (
-          <FormItem className="w-full">
+          <FormItem className='w-full'>
             <FormControl>
               <Dropdown
                 onChangeHandler={field.onChange}

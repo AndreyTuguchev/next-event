@@ -1,3 +1,3 @@
-import EventForm from "./event-form";
+import EventForm from './event-form';
 
 export default EventForm;

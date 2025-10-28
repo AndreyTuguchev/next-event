@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import GoogleAnalytics from "@/lib/analytics/google-analytics";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-let googleAnalyticsIdOne = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID_1 || "";
+import GoogleAnalytics from '@/lib/analytics/google-analytics';
+
+let googleAnalyticsIdOne = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID_1 || '';
 
 const AllAnalyticsScripts = () => {
   const [loadGoogleScriptsState, setLoadGoogleScriptsState] = useState(false);
@@ -22,27 +23,27 @@ const AllAnalyticsScripts = () => {
       }
 
       window.addEventListener(
-        "scroll",
+        'scroll',
         () => {
           !loadGoogleScriptsState && setLoadGoogleScriptsState(true);
         },
-        { once: true },
+        { once: true }
       );
 
       window.addEventListener(
-        "click",
+        'click',
         () => {
           !loadGoogleScriptsState && setLoadGoogleScriptsState(true);
         },
-        { once: true },
+        { once: true }
       );
 
       window.addEventListener(
-        "touchstart",
+        'touchstart',
         () => {
           !loadGoogleScriptsState && setLoadGoogleScriptsState(true);
         },
-        { once: true },
+        { once: true }
       );
     }
 
@@ -52,7 +53,7 @@ const AllAnalyticsScripts = () => {
   return (
     loadGoogleScriptsState && (
       <>
-        {googleAnalyticsIdOne && googleAnalyticsIdOne != "" && (
+        {googleAnalyticsIdOne && googleAnalyticsIdOne != '' && (
           <GoogleAnalytics googleTrackingCode={googleAnalyticsIdOne} />
         )}
       </>

@@ -1,3 +1,3 @@
-import AllAnalyticsScripts from "./all-analytics-scripts";
+import AllAnalyticsScripts from './all-analytics-scripts';
 
 export default AllAnalyticsScripts;

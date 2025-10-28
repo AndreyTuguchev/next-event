@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { useUploadThing } from "@/lib/uploadthing";
+import { useState } from 'react';
+
+import { useUploadThing } from '@/lib/uploadthing';
 
 export function useFileUpload() {
   const [files, setFiles] = useState<File[]>([]);
-  const { startUpload, isUploading } = useUploadThing("imageUploader");
+  const { startUpload, isUploading } = useUploadThing('imageUploader');
 
   const uploadFiles = async (
     filesToUpload: File[],
-    fallbackUrl: string,
+    fallbackUrl: string
   ): Promise<string> => {
     if (filesToUpload.length === 0) {
       return fallbackUrl;
@@ -16,7 +17,7 @@ export function useFileUpload() {
     const uploadedImages = await startUpload(filesToUpload);
 
     if (!uploadedImages || uploadedImages.length === 0) {
-      throw new Error("File upload failed");
+      throw new Error('File upload failed');
     }
 
     return uploadedImages[0].url;

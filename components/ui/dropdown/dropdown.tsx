@@ -1,12 +1,5 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ICategory } from "@/lib/database/models/category.model";
-import { startTransition, useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from 'react';
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,23 +10,32 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import {
   createCategory,
   getAllCategories,
-} from "@/lib/actions/category.action";
-import { Input } from "../input";
-import { DropdownProps } from "./dropdown.types";
+} from '@/lib/actions/category.action';
+import { ICategory } from '@/lib/database/models/category.model';
+
+import { Input } from '../input';
+import { DropdownProps } from './dropdown.types';
 
 const Dropdown = ({ value, onChangeHandler, userRole }: DropdownProps) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [newCategory, setNewCategory] = useState("");
+  const [newCategory, setNewCategory] = useState('');
 
   const handleCategory = () => {
     createCategory({
       categoryName: newCategory.trim(),
-    }).then((category) => {
-      setCategories((prevState) => [...prevState, category]);
+    }).then(category => {
+      setCategories(prevState => [...prevState, category]);
     });
   };
 
@@ -49,36 +51,36 @@ const Dropdown = ({ value, onChangeHandler, userRole }: DropdownProps) => {
 
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
-      <SelectTrigger className="select-field">
-        <SelectValue placeholder="Category" />
+      <SelectTrigger className='select-field'>
+        <SelectValue placeholder='Category' />
       </SelectTrigger>
       <SelectContent>
         {categories.length > 0 &&
-          categories.map((category) => (
+          categories.map(category => (
             <SelectItem
               key={`${category._id}-${category.name}`}
               value={category._id}
-              className="select-item p-regular-14"
+              className='select-item p-regular-14'
             >
               {category.name}
             </SelectItem>
           ))}
 
         <AlertDialog>
-          {"admin" == userRole && (
-            <AlertDialogTrigger className="p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500">
+          {'admin' == userRole && (
+            <AlertDialogTrigger className='p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500'>
               Add New Category
             </AlertDialogTrigger>
           )}
-          <AlertDialogContent className="bg-white">
+          <AlertDialogContent className='bg-white'>
             <AlertDialogHeader>
               <AlertDialogTitle>New Category</AlertDialogTitle>
               <AlertDialogDescription>
                 <Input
-                  type="text"
-                  placeholder="Category name"
-                  className="input-field mt-3"
-                  onChange={(e) => setNewCategory(e.target.value)}
+                  type='text'
+                  placeholder='Category name'
+                  className='input-field mt-3'
+                  onChange={e => setNewCategory(e.target.value)}
                 />
               </AlertDialogDescription>
             </AlertDialogHeader>

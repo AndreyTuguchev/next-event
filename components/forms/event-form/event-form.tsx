@@ -1,32 +1,30 @@
 // EventForm/index.tsx
-"use client";
+'use client';
 
-import { useCallback } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import * as z from "zod";
+import { useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
+import { eventDefaultValues } from '@/constants';
+import { useFileUpload } from '@/hooks/use-file-upload';
+import { useToast } from '@/hooks/use-toast';
+import { createEvent, updateEvent } from '@/lib/actions/event.action';
+import type { IEvent } from '@/lib/database/models/event.model';
+import { eventFormSchema } from '@/lib/validator';
 
-import { eventFormSchema } from "@/lib/validator";
-import { eventDefaultValues } from "@/constants";
-import { createEvent, updateEvent } from "@/lib/actions/event.action";
-import type { IEvent } from "@/lib/database/models/event.model";
-
-import AdminSection from "./sections/admin-section";
-import InfoSection from "./sections/info-section";
-import DetailsSection from "./sections/details-section";
-import LocationSection from "./sections/location-section";
-import DateTimeSection from "./sections/date-time-section";
-import PricingSection from "./sections/pricing-section";
-
-import { useFileUpload } from "@/hooks/use-file-upload";
-import handleEventSubmission from "./utils/handle-event-submission";
-import { useToast } from "@/hooks/use-toast";
-import normalizeEventData from "./utils/normalize-event-data";
-import { EventFormProps } from "./event-form.types";
+import { EventFormProps } from './event-form.types';
+import AdminSection from './sections/admin-section';
+import DateTimeSection from './sections/date-time-section';
+import DetailsSection from './sections/details-section';
+import InfoSection from './sections/info-section';
+import LocationSection from './sections/location-section';
+import PricingSection from './sections/pricing-section';
+import handleEventSubmission from './utils/handle-event-submission';
+import normalizeEventData from './utils/normalize-event-data';
 
 const EventForm = ({
   userId,
@@ -70,25 +68,25 @@ const EventForm = ({
         if (result.success) {
           form.reset();
           toast({
-            title: "Success",
-            description: `Event ${type === "Create" ? "created" : "updated"} successfully`,
+            title: 'Success',
+            description: `Event ${type === 'Create' ? 'created' : 'updated'} successfully`,
           });
           router.push(`/events/${result.eventId}`);
         } else {
           toast({
-            title: "Error",
-            description: result.error || "Failed to submit event",
-            variant: "destructive",
+            title: 'Error',
+            description: result.error || 'Failed to submit event',
+            variant: 'destructive',
           });
         }
       } catch (error) {
         toast({
-          title: "Error",
+          title: 'Error',
           description:
             error instanceof Error
               ? error.message
-              : "An unexpected error occurred",
-          variant: "destructive",
+              : 'An unexpected error occurred',
+          variant: 'destructive',
         });
       }
     },
@@ -102,7 +100,7 @@ const EventForm = ({
       form,
       toast,
       router,
-    ],
+    ]
   );
 
   const isSubmitting = form.formState.isSubmitting || isUploading;
@@ -111,7 +109,7 @@ const EventForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-5 mb-[200px] pt-[30px]"
+        className='mb-[200px] flex flex-col gap-5 pt-[30px]'
         aria-label={`${type} event form`}
       >
         {isWebsiteAdmin && <AdminSection control={form.control} />}
@@ -127,13 +125,13 @@ const EventForm = ({
         <PricingSection control={form.control} />
 
         <Button
-          type="submit"
-          size="lg"
+          type='submit'
+          size='lg'
           disabled={isSubmitting}
-          className="col-span-2 w-full button"
+          className='button col-span-2 w-full'
           aria-busy={isSubmitting}
         >
-          {isSubmitting ? "Submitting Event..." : `${type} Event`}
+          {isSubmitting ? 'Submitting Event...' : `${type} Event`}
         </Button>
       </form>
     </Form>
@@ -142,7 +140,7 @@ const EventForm = ({
 
 // Helper function
 function getInitialValues(event: IEvent | undefined, type: string) {
-  if (event && type === "Update") {
+  if (event && type === 'Update') {
     return {
       ...event,
       startDateTime: new Date(event.startDateTime),

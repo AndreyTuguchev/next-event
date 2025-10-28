@@ -1,3 +1,3 @@
-import AdminSection from "./admin-section";
+import AdminSection from './admin-section';
 
 export default AdminSection;

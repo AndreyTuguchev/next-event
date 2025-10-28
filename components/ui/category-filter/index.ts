@@ -1,3 +1,3 @@
-import CategoryFilter from "./category-filter";
+import CategoryFilter from './category-filter';
 
 export default CategoryFilter;

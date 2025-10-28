@@ -1,15 +1,16 @@
 /// <reference types="vitest" />
 
-import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react";
-import { playwright } from "@vitest/browser-playwright";
-import path from "path";
+import path from 'path';
+
+import react from '@vitejs/plugin-react';
+import { playwright } from '@vitest/browser-playwright';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./"),
+      '@': path.resolve(__dirname, './'),
     },
   },
 
@@ -23,14 +24,14 @@ export default defineConfig({
 
       instances: [
         {
-          browser: "chromium", // could be 'firefox' or 'webkit' too
+          browser: 'chromium', // could be 'firefox' or 'webkit' too
         },
       ],
       headless: true, // run browser tests in headless mode
     },
-    setupFiles: ["./vitest.setup.ts"],
+    setupFiles: ['./vitest.setup.ts'],
   },
   define: {
-    "process.env": {},
+    'process.env': {},
   },
 });

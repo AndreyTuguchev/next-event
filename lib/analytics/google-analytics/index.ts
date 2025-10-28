@@ -1,3 +1,3 @@
-import GoogleAnalytics from "./google-analytics";
+import GoogleAnalytics from './google-analytics';
 
 export default GoogleAnalytics;

@@ -1,7 +1,7 @@
-import { EventFormValues } from "../../event-form.types";
+import { EventFormValues } from '../../event-form.types';
 
 export type SubmissionTypes = {
-  type: "Create" | "Update";
+  type: 'Create' | 'Update';
   data: EventFormValues;
   userId: string;
   eventId?: string;

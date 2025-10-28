@@ -1,4 +1,4 @@
-import { SubmissionResult } from "../../event-form.types";
+import { SubmissionResult } from '../../event-form.types';
 
 /**
  * Processes the result from event creation/update
@@ -11,13 +11,13 @@ const handleEventResult = (result: any): SubmissionResult => {
   if (!result) {
     return {
       success: false,
-      error: "No response from server",
+      error: 'No response from server',
     };
   }
 
   // Handle string-based error responses (legacy)
-  if (typeof result === "string") {
-    if (result.startsWith("Error") || result.startsWith("Alert")) {
+  if (typeof result === 'string') {
+    if (result.startsWith('Error') || result.startsWith('Alert')) {
       return {
         success: false,
         error: result,
@@ -43,7 +43,7 @@ const handleEventResult = (result: any): SubmissionResult => {
 
   return {
     success: false,
-    error: "Invalid response format",
+    error: 'Invalid response format',
   };
 };
 

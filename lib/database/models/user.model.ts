@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import { model, models, Schema } from 'mongoose';
 
 /**
  * listOfEventsCreatedTime and listOfBlockedTime are a strings with Unix timestamps separated by ";"
@@ -16,16 +16,16 @@ const UserSchema = new Schema({
 
   maxEventsAllowed: { type: Number, default: 25 },
   eventsCreatedAmount: { type: Number, default: 0 },
-  listOfEventsCreatedTime: { type: String, default: "" },
+  listOfEventsCreatedTime: { type: String, default: '' },
   blockedUser: { type: Boolean, default: false },
   amountOfBlockedActions: { type: Number, default: 0 },
-  listOfBlockedTime: { type: String, default: "" },
-  userRole: { type: String, default: "default_user" },
+  listOfBlockedTime: { type: String, default: '' },
+  userRole: { type: String, default: 'default_user' },
   eventsApprovedByAdmin: { type: Number, default: 0 },
   eventsRejectedByAdmin: { type: Number, default: 0 },
   eventsPending: { type: Number, default: 0 },
 });
 
-const User = models.User || model("User", UserSchema);
+const User = models.User || model('User', UserSchema);
 
 export default User;

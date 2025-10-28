@@ -1,28 +1,28 @@
+import FileUploader from '@/components/ui/file-uploader';
 import {
+  FormControl,
   FormField,
   FormItem,
-  FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import FileUploader from "@/components/ui/file-uploader";
+} from '@/components/ui/form';
+import { Textarea } from '@/components/ui/textarea';
 
-import { DetailsSectionTypes } from "./details-section.types";
+import { DetailsSectionTypes } from './details-section.types';
 
 const DetailsSection = ({ control, setFiles }: DetailsSectionTypes) => {
   return (
-    <div className="flex flex-col gap-5 md:flex-row">
+    <div className='flex flex-col gap-5 md:flex-row'>
       <FormField
         control={control}
-        name="description"
+        name='description'
         render={({ field }) => (
-          <FormItem className="w-full">
-            <FormControl className="h-72">
+          <FormItem className='w-full'>
+            <FormControl className='h-72'>
               <Textarea
-                placeholder="Description"
+                placeholder='Description'
                 {...field}
-                className="textarea rounded-2xl"
-                aria-label="Event description"
+                className='textarea rounded-2xl'
+                aria-label='Event description'
                 required
               />
             </FormControl>
@@ -33,10 +33,10 @@ const DetailsSection = ({ control, setFiles }: DetailsSectionTypes) => {
 
       <FormField
         control={control}
-        name="imageUrl"
+        name='imageUrl'
         render={({ field }) => (
-          <FormItem className="w-full cursor-pointer">
-            <FormControl className="h-72">
+          <FormItem className='w-full cursor-pointer'>
+            <FormControl className='h-72'>
               <FileUploader
                 onFieldChange={field.onChange}
                 imageUrl={field.value}

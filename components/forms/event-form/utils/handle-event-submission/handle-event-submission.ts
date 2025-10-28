@@ -1,6 +1,6 @@
-import { SubmissionResult } from "../../event-form.types";
-import handleEventResult from "../handle-event-result";
-import { SubmissionTypes } from "./handle-event-submission.types";
+import { SubmissionResult } from '../../event-form.types';
+import handleEventResult from '../handle-event-result';
+import { SubmissionTypes } from './handle-event-submission.types';
 
 /**
  * Handles event creation or update
@@ -16,21 +16,21 @@ const handleEventSubmission = async ({
   updateEvent,
 }: SubmissionTypes): Promise<SubmissionResult> => {
   try {
-    if (type === "Create") {
+    if (type === 'Create') {
       const result = await createEvent({
         event: data,
         userId,
-        path: "/profile",
+        path: '/profile',
       });
 
       return handleEventResult(result);
     }
 
-    if (type === "Update") {
+    if (type === 'Update') {
       if (!eventId) {
         return {
           success: false,
-          error: "Event ID is required for updates",
+          error: 'Event ID is required for updates',
         };
       }
 
@@ -46,13 +46,13 @@ const handleEventSubmission = async ({
 
     return {
       success: false,
-      error: "Invalid submission type",
+      error: 'Invalid submission type',
     };
   } catch (error) {
     return {
       success: false,
       error:
-        error instanceof Error ? error.message : "An unexpected error occurred",
+        error instanceof Error ? error.message : 'An unexpected error occurred',
     };
   }
 };
