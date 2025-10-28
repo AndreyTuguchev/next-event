@@ -1,16 +1,26 @@
 /// <reference types="vitest" />
+
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
+import { playwright } from "@vitest/browser-playwright";
+import path from "path";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./"),
+    },
+  },
+
   test: {
     globals: true, // allows using `describe`, `it`, `expect` without imports
 
     // Enables browser mode
     browser: {
       enabled: true,
+      provider: playwright(),
+
       instances: [
         {
           browser: "chromium", // could be 'firefox' or 'webkit' too
@@ -18,5 +28,9 @@ export default defineConfig({
       ],
       headless: true, // run browser tests in headless mode
     },
+    setupFiles: ["./vitest.setup.ts"],
+  },
+  define: {
+    "process.env": {},
   },
 });
