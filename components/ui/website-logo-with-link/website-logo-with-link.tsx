@@ -1,5 +1,5 @@
 import Link from "next/link";
-import WebsiteLogo from "../website-logo";
+import WebsiteLogo from "@/components/ui/website-logo";
 
 const WebsiteLogoWithLink = ({ lazyload = false }: { lazyload?: boolean }) => {
   return (
