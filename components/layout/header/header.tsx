@@ -1,5 +1,4 @@
 import { SignedIn, SignedOut, UserButton, auth } from "@clerk/nextjs";
-import Image from "next/image";
 import Link from "next/link";
 import NavItems from "@/components/ui/nav-items";
 import MobileNav from "@/components/ui/mobile-nav";

@@ -1,6 +1,5 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-import Image from "next/image";
 import NavItems from "@/components/ui/nav-items";
 import MobileNavToggle from "@/components/ui/mobile-nav-toggle";
 import WebsiteLogo from "../website-logo";
