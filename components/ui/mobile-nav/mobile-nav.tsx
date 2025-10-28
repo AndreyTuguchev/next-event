@@ -2,7 +2,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 import NavItems from "@/components/ui/nav-items";
 import MobileNavToggle from "@/components/ui/mobile-nav-toggle";
-import WebsiteLogo from "../website-logo";
+import WebsiteLogo from "@/components/ui/website-logo";
 
 const MobileNav = ({ websiteAdmin }: { websiteAdmin: boolean }) => {
   return (
